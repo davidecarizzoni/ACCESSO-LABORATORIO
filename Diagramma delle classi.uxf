@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>120</y>
+      <w>210</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Nodo
+--
+-Accesso info
+-Nodo link
+--
++Nodo(in accesso:Accesso)
++getInfo():Accesso
++setInfo(in accesso:Accesso)
++getLink():Nodo
++setLink(in link:Nodo)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>30</y>
+      <w>340</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>Accesso
+--
+-int idAccesso
+-int matricola???FACCIO CLASSE DIPENDENTE
+-Data dataOraAcceso
+--
++Accesso(in idAccesso:int, in matricola:int, in dataOraAccesso:Data)
++getIdAccesso():int
++setIdAccesso(in idAccesso:int)
++getMatricola():int
++setMatricola(in Matricola:int)
++getDataOraAccesso():Data
++setDataOraAccesso(in dataOraAccesso:Data)
++toString():String
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>170</y>
+      <w>110</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>650</x>
+      <y>150</y>
+      <w>80</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;70.0;60.0;70.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>260</y>
+      <w>30</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>360</y>
+      <w>470</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>Laboratorio
+--
+-Nodo head
+-int elementi
+--
++Laboratorio()
++getElementi():int
+-creaNodo(in accesso:Accesso, in link:Nodo):Nodo
+-getLinkPosizione(in posizione:int):Nodo ??devo fare i gettere e i setter
++inserisciAccesso(in accesso:Accesso)
++verificaPresenzaDipendente(in dataOraAccesso:Data):Dipendente
++verificaPresenzaDipendente(in matricola:int):Dipendente
++serializzazione(in nomeFile:String)
++deserializzazione(in nomeFile:String):Laboratrio
++salvaCSC(in nomeFile:String)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
