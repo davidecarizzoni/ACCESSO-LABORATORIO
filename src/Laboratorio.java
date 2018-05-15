@@ -76,7 +76,7 @@ public class Laboratorio implements Serializable
 		Nodo p=head;
 		while (p!=null)
 		{
-			risultato+="-->"+p.getInfo().toString()+"\n";
+			risultato+="-->Matricola: "+p.getInfo().toString()+"\n";
 			p=p.getLink();
 	}
 		return risultato;
@@ -173,7 +173,38 @@ public class Laboratorio implements Serializable
 		return p.getInfo();
 	}
 
-	
+	//verifica la presenza in una data inserendo la matricola di cui si vuole verificare la presenza
+	public boolean verificaAccessi(int matricola, LocalDate data) throws IOException, ClassNotFoundException, AccessoMatricolaNotFoundException
+	{
+			boolean presenza=false;
+		
+			String nomeFile="";
+			nomeFile="C:\\Users\\Davide Carizzoni\\Desktop\\Davide\\SCUOLA QUARTA SUPERIORE\\INFORMATICA\\JAVA\\Workspace-carizzoni\\ACCESSO LABORATORIO\\fileBIN\\"+data.getDayOfMonth()+"_"+data.getMonthValue()+"_"+data.getYear()+".bin";
+			
+			FileInputStream file=new FileInputStream(nomeFile);
+			ObjectInputStream reader=new ObjectInputStream(file);
+			
+			Laboratorio laboratorio;
+			laboratorio=(Laboratorio)reader.readObject();
+			file.close();
+			
+			if (elementi==0)
+				throw new AccessoMatricolaNotFoundException("Nessun accesso trovato con matricola "+matricola);
+			Nodo p=head;
+			while (p!=null)
+			{
+				if (p.getInfo().getMatricola()==matricola)
+				{
+					presenza=true;
+					return presenza;
+				}
+				p=p.getLink();
+			}
+			return presenza;
+			
+			
+
+	}
 
 	//SERIALIAZZAZIONE E DESERIALIZZAZIONE
 	public void salvaLaboratorio(LocalDate data) throws IOException
@@ -193,7 +224,7 @@ public class Laboratorio implements Serializable
 	public Laboratorio CaricaLaboratorio(LocalDate data) throws IOException, ClassNotFoundException
 	{
 		String nomeFile="";
-		nomeFile=data.getDayOfMonth()+"_"+data.getMonthValue()+"_"+data.getYear();
+		nomeFile="C:\\Users\\Davide Carizzoni\\Desktop\\Davide\\SCUOLA QUARTA SUPERIORE\\INFORMATICA\\JAVA\\Workspace-carizzoni\\ACCESSO LABORATORIO\\fileBIN\\"+data.getDayOfMonth()+"_"+data.getMonthValue()+"_"+data.getYear()+".bin";
 		
 		FileInputStream file=new FileInputStream(nomeFile);
 		ObjectInputStream reader=new ObjectInputStream(file);
@@ -218,7 +249,7 @@ public class Laboratorio implements Serializable
 		for (int i = 1; i <=getElementi(); i++) 
 		{
 			accesso=getAcesso(i);
-			accessoCSV=accesso.getDipendente().getNominativo()+";"+accesso.getDataOra()+";"+accesso.getIdAccesso()+";";
+			accessoCSV=accesso.getMatricola()+";"+accesso.getDataOra()+";"+accesso.getIdAccesso()+";";
 			file.toFile(accessoCSV);
 		}
 		file.closeFile();
