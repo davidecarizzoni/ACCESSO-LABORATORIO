@@ -8,7 +8,7 @@ public class Accesso implements Serializable
 	private int idAccesso;
 	private static int contaAccessi=0;
 	private int matricola;
-	private Dipendente dipendente;
+	
 	
 
 	private LocalDateTime DataOra;
@@ -16,12 +16,12 @@ public class Accesso implements Serializable
 	
 	
 	//COSTRUTTORE
-	public Accesso(Dipendente d, LocalDateTime DataOra)
+	public Accesso(int matricola, LocalDateTime DataOra)
 	{
 		contaAccessi++;
 		setIdAccesso(contaAccessi);
 		setDataOra(DataOra);
-		setDipendente(d);
+		setMatricola(matricola);
 	}
 	
 	//COSTRUTTORE COPIA
@@ -29,7 +29,7 @@ public class Accesso implements Serializable
 	{
 		setIdAccesso(a.getIdAccesso());
 		setDataOra(a.getDataOra());
-		setDipendente(a.getDipendente());
+		setMatricola(a.getMatricola());
 	}
 	
 	//GETTER E SETTER
@@ -59,20 +59,12 @@ public class Accesso implements Serializable
 		this.DataOra = dataOra;
 	}
 	
-	public Dipendente getDipendente()
-	{
-		return dipendente;
-	}
-
-	public void setDipendente(Dipendente dipendente)
-	{
-		this.dipendente = new Dipendente(dipendente);
-	}
+	
 	
 	//ALTRI METODI
 	public String toString()
 	{
-		return getDipendente().getNominativo()+". Data e ora: "+getDataOra()+" Id Accesso: "+getIdAccesso();
+		return getMatricola()+". Data e ora: "+getDataOra()+" Id Accesso: "+getIdAccesso();
 	}
 
 //	<-------------------------------------------PROVA ACCESSO----------------------------------------------------------->
