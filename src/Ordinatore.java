@@ -116,19 +116,19 @@ public class Ordinatore
 		a1=new Accesso(laboratorio.getAcesso(pos1));
 		a2=new Accesso(laboratorio.getAcesso(pos2));
 		
-		System.out.println(a1.toString());
-		System.out.println(a2.toString());
+	//	System.out.println(a1.toString());
+	//	System.out.println(a2.toString());
 		
 		laboratorio.eliminaInPosizione(pos2);
-		System.out.println(laboratorio.toString());
+	//	System.out.println(laboratorio.toString());
 		laboratorio.eliminaInPosizione(pos1);
-		System.out.println(laboratorio.toString());
+	//	System.out.println(laboratorio.toString());
 		
 		
 		laboratorio.inserisciInPosizione(a2, pos1);
-		System.out.println(laboratorio.toString());
+	//	System.out.println(laboratorio.toString());
 		laboratorio.inserisciInPosizione(a1, pos2);
-		System.out.println(laboratorio.toString());
+	//	System.out.println(laboratorio.toString());
 		//s=array[pos1];
 		//array[pos1]=array[pos2];
 		//array[pos2]=s;
@@ -136,7 +136,7 @@ public class Ordinatore
 	}
 	
 //<---------------------------------------------------PROVA ORDINATORE NODI----------------------------------------->	
-	public static void main(String[] args) 
+/*	public static void main(String[] args) 
 	{
 		LocalDate data= LocalDate.of(2018, 5, 15);
 		LocalTime ora=LocalTime.of(16,30,0);
@@ -172,7 +172,7 @@ public class Ordinatore
 		System.out.println(laboratorio.toString());
 		try 
 		{
-			Ordinatore.scambia(laboratorio, 1, 2);
+			Ordinatore.scambia(laboratorio, 2, 3);
 		} 
 		catch (LaboratorioException e) 
 		{
@@ -180,5 +180,5 @@ public class Ordinatore
 		}
 		System.out.println(laboratorio.toString());
 	}
-
+*/
 }
