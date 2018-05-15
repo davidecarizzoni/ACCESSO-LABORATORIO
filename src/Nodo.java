@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /**
  * La classe Nodo rappresenta un nodo. Il nodo è costituito dai seguenti attributi:
  * un info e un link. Info è la componente informativa, contiene informazioni sugli elementi della lista,
@@ -6,7 +8,7 @@
  * @author Davide Carizzoni
  * @version 1.0
  */
-public class Nodo 
+public class Nodo implements Serializable
 {
 	private Accesso info;//contiene reference a oggettto
 	private Nodo link;
@@ -21,6 +23,12 @@ public class Nodo
 	{
 		setInfo(accesso);
 		link = null;
+	}
+	//COSTRUTTORE DI COPIA
+	public Nodo(Nodo n)
+	{
+		setInfo(n.getInfo());
+		setLink(n.getLink());
 	}
 	
 	public Accesso getInfo() 

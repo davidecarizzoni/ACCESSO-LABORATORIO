@@ -1,6 +1,6 @@
+import java.io.Serializable;
 
-
-public class Dipendente
+public class Dipendente implements Serializable
 {
 	//ATTRIBUTI
 	private int matricola;

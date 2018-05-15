@@ -1,7 +1,8 @@
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Accesso 
+public class Accesso implements Serializable
 {
 	//ATRIBUTI
 	private int idAccesso;
@@ -15,11 +16,11 @@ public class Accesso
 	
 	
 	//COSTRUTTORE
-	public Accesso(Dipendente d)
+	public Accesso(Dipendente d, LocalDateTime DataOra)
 	{
 		contaAccessi++;
 		setIdAccesso(contaAccessi);
-		setDataOra(LocalDateTime.now());
+		setDataOra(DataOra);
 		setDipendente(d);
 	}
 	
@@ -75,7 +76,7 @@ public class Accesso
 	}
 
 //	<-------------------------------------------PROVA ACCESSO----------------------------------------------------------->
-	public static void main(String[] args) 
+/*	public static void main(String[] args) 
 	{
 		Dipendente d1=new Dipendente(1,"Davide");
 		Dipendente d2=new Dipendente(2,"Diego");
@@ -92,17 +93,12 @@ public class Accesso
 		Accesso a9=new Accesso(a2);
 		
 		
-		System.out.println(a1.getIdAccesso());
-		System.out.println(a2.getIdAccesso());
-		System.out.println(a3.getIdAccesso());
-		System.out.println(a4.getIdAccesso());
-		System.out.println(a5.getIdAccesso());
-		System.out.println(a6.getIdAccesso());
-		System.out.println(a7.getIdAccesso());
-		System.out.println(a8.getIdAccesso());
-		System.out.println(a9.getIdAccesso());
+		System.out.println(a1.toString());
+		System.out.println(a2.toString());
 		
-	}
+	
+		
+	}*/
 	
 	
 }
