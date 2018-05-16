@@ -32,7 +32,7 @@ public class MainClass
 		
 		//PARAMETRI PER ACQUISIRE DATA
 		int scelta;
-		LocalDate data;
+		LocalDate data = null;
 		int aa = 0,mm = 0,gg = 0;
 		LocalTime ora;
 		int h,m,s;
@@ -54,26 +54,15 @@ public class MainClass
 			{
 			case 1:
 				System.out.println("INSERIRE LA DATA DI CUI SI VOGLIONO REGISTRARE GLI ACCESSI");
-				System.out.print("Giorno: ");
+				l1=new Laboratorio();
 					try {
+						System.out.print("Giorno: ");
 						gg=tastiera.readInt();
-					}catch (NumberFormatException e) {
-						System.out.println("Formato dato inserito errato");
-					} catch (IOException e) {
-						System.out.println("Impossibile leggere da tastiera");
-					}
-				System.out.print("Mese: ");
-					try {
+						System.out.print("Mese: ");
 						mm=tastiera.readInt();
-					} catch (NumberFormatException e) {
-						System.out.println("Formato dato inserito errato");
-					} catch (IOException e) {
-						System.out.println("Impossibile leggere da tastiera");
-					}
-				System.out.print("Anno: ");
-					try {
+						System.out.print("Anno: ");
 						aa=tastiera.readInt();
-					} catch (NumberFormatException e) {
+					}catch (NumberFormatException e) {
 						System.out.println("Formato dato inserito errato");
 					} catch (IOException e) {
 						System.out.println("Impossibile leggere da tastiera");
@@ -102,7 +91,7 @@ public class MainClass
 					
 					System.out.println("Visualizzazione accessi: \n"+l1.toString());	
 					
-					System.out.println("Registrare un'altro accesso in  data " +data.toString()+"? ");
+					System.out.print("Registrare un'altro accesso in  data " +data.toString()+"? ");
 					try {
 						scelta1=tastiera.readString();
 					} catch (NumberFormatException e) {
@@ -112,50 +101,116 @@ public class MainClass
 					}
 					
 				}while(scelta1.compareToIgnoreCase("si")==0);
-				try {
-					l1.salvaLaboratorio(data);
-					System.out.println("Scrittura su file avvenuta con successo");
-				} catch (IOException e) {
-					System.out.println("Impossibile completare l'operazione di scrittura");
-				}
+					try {
+						l1.salvaLaboratorio(data);
+						System.out.println("Scrittura su file avvenuta con successo");
+					} catch (IOException e) {
+						System.out.println("Impossibile completare l'operazione di scrittura");
+					}
 				break;
 			
 			case 2:
-				System.out.println("INSERIRE LA DATA DI CUI SI VOGLIONO REGISTRARE GLI ACCESSI");
-				System.out.print("Giorno: ");
+				System.out.println("INSERIRE LA DATA DI CUI SI VOGLIONO CARICARE GLI ACCESSI");
 					try {
+						System.out.print("Giorno: ");
 						gg=tastiera.readInt();
+						System.out.print("Mese: ");
+						mm=tastiera.readInt();
+						System.out.print("Anno: ");
+						aa=tastiera.readInt();
 					}catch (NumberFormatException e) {
 						System.out.println("Formato dato inserito errato");
 					} catch (IOException e) {
 						System.out.println("Impossibile leggere da tastiera");
 					}
-				System.out.print("Mese: ");
+				
+				data= LocalDate.of(aa, mm, gg);	
+				//String nomeFile="C:\\Users\\Davide Carizzoni\\Desktop\\Davide\\SCUOLA QUARTA SUPERIORE\\INFORMATICA\\JAVA\\Workspace-carizzoni\\ACCESSO LABORATORIO\\fileBIN\\"+data.getDayOfMonth()+"_"+data.getMonthValue()+"_"+data.getYear()+".bin";
+				System.out.println("DATA INSERITA->"+data.toString());
 					try {
+						//l1.salvaLaboratorio(data);
+						l1=l1.CaricaLaboratorio(data);
+						System.out.println("Caricamento degli accessi in data "+data.toString()+" eseguito con successo");
+						System.out.println(l1.toString());
+					} catch (ClassNotFoundException e) {
+						System.out.println("Impossibile caricare oggetti di tipo laboratorio");
+					} catch (IOException e) {
+						System.out.println("Impossibile completare il caricamento degli accessi");
+					}
+				break;
+/*			
+			case 3:
+				System.out.println("INSERIRE LA DATA DI CUI SI VUOLE VERIFICARE LA PRESENZA");
+					try {
+						System.out.print("Giorno: ");
+						gg=tastiera.readInt();
+						System.out.print("Mese: ");
 						mm=tastiera.readInt();
-					} catch (NumberFormatException e) {
-						System.out.println("Formato dato inserito errato");
-					} catch (IOException e) {
-						System.out.println("Impossibile leggere da tastiera");
-					}
-				System.out.print("Anno: ");
-					try {
+						System.out.print("Anno: ");
 						aa=tastiera.readInt();
-					} catch (NumberFormatException e) {
+					}catch (NumberFormatException e) {
 						System.out.println("Formato dato inserito errato");
 					} catch (IOException e) {
 						System.out.println("Impossibile leggere da tastiera");
 					}
-					data= LocalDate.of(aa, mm, gg);	
-					System.out.println("DATA INSERITA->"+data.toString());
+				data= LocalDate.of(aa, mm, gg);	
+				System.out.println("DATA INSERITA->"+data.toString());
+					try {
+						//l1.salvaLaboratorio(data);
+						l1=l1.CaricaLaboratorio(data);
+						System.out.println("Caricamento degli accessi in data "+data.toString()+" eseguito con successo");
+						System.out.println(l1.toString());
+					} catch (ClassNotFoundException e) {
+						System.out.println("Impossibile caricare oggetti di tipo laboratorio");
+					} catch (IOException e) {
+						System.out.println("Impossibile completare il caricamento degli accessi");
+					}					
+				System.out.println("INSERIRE LA MATRICOLA DEL DIPENDENTE DI CUI SI VOGLIONO VERIFICARE LE PRESENZE");
+					try {
+						System.out.print("Matricola");
+						matricola=tastiera.readInt();
+					} catch (NumberFormatException e1) {
+						System.out.println("Formato dato inserito errato");
+					} catch (IOException e1) {
+						System.out.println("Impossibile leggere da tastiera");
+					}
+				break;
+	*/			
+			case 4:
+				Laboratorio l2=new Laboratorio();
+				System.out.println("SALVA ACCESSI IN UN FILE DI TESTO IN ORDINE CRESCENTE");
 				try {
-					l1.CaricaLaboratorio(data);
-					System.out.println("Caricamento degli accessi in data "+data.toString()+" eseguito con successo");
+					l2=Ordinatore.selectionSortCrescente(l1);
+					System.out.println(l2.toString());
+					l2.esportaLaboratorioCSV(data);
+					System.out.println("Operazione completata con successo");
+				} catch (FileException e) {
+					System.out.println("Impossibile completare l'operazione, file aperto in scrittura");
+				} catch (IOException e) {
+					System.out.println("Impossibile completare il salvataggio degli oggetti");
+				} catch (LaboratorioException e) {
+					System.out.println(e.toString());
+				//} catch (ClassNotFoundException e) {
+				//	System.out.println("Impossibile caricare oggetti di tipo laboratorio");
+				}
+				
+				break;
+			
+			case 5:
+				
+				System.out.println("VISUALIZZA ACCESSI IN BASE ALL'ORARIO");
+				try {
+					l1=Ordinatore.selectionSortCrescenteNodi(l1);
+					System.out.println("visualizzazione accessi con orario crescente");
 					System.out.println(l1.toString());
+				} catch (LaboratorioException e) {
+					System.out.println(e.toString());
 				} catch (ClassNotFoundException e) {
 					System.out.println("Impossibile caricare oggetti di tipo laboratorio");
 				} catch (IOException e) {
 					System.out.println("Impossibile completare il caricamento degli accessi");
+				} catch (FileException e) {
+					System.out.println("File non trovato");
 				}
 				break;
 				
@@ -163,6 +218,7 @@ public class MainClass
 				break;
 			}
 		}while(scelta!=0);
+		
 	}
 
 }

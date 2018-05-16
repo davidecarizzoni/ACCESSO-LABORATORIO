@@ -1,20 +1,32 @@
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-
+/**
+ * La classe Accesso rappresenta un accesso di un dipendente al laboratorio. La classe è costituita dai seguenti attributi:
+ * la matricola del dipendente che esegue l'accesso,
+ * l'identificativo numerico dell'accesso e la data e l'ora in cui il dipendente eseguirà l'accesso
+ * 
+ * @author Davide Carizzoni
+ * @version 1.0
+ */
 public class Accesso implements Serializable
 {
-	//ATRIBUTI
+	//ATTRIBUTI
 	private int idAccesso;
 	private static int contaAccessi=0;
 	private int matricola;
 	
-	
-
 	private LocalDateTime DataOra;
 	
 	
-	
+	/**
+	 * Costruttore della classe accesso. Instanzia un nuovo accesso.
+	 * Richiede la matricola del dipendente di cui si istanzia l'accesso,
+	 * la data e l'orario
+	 * 	
+	 * @param matricola rappresenta la matricola del dipendente che esegue l'accesso
+	 * @param DataOra rappresenta la data e l'orario(attuale) nei quali il dipendente esegue l'accesso
+	 */
 	//COSTRUTTORE
 	public Accesso(int matricola, LocalDateTime DataOra)
 	{
@@ -24,44 +36,78 @@ public class Accesso implements Serializable
 		setMatricola(matricola);
 	}
 	
+	/**
+	 * Costruttore di copia della classe Accesso. Istanzia un nuovo accesso
+	 * @param accesso rappresenta l/accesso di cui si vuole creare una copia
+	 */
 	//COSTRUTTORE COPIA
-	public Accesso(Accesso a)
+	public Accesso(Accesso accesso)
 	{
-		setIdAccesso(a.getIdAccesso());
-		setDataOra(a.getDataOra());
-		setMatricola(a.getMatricola());
+		setIdAccesso(accesso.getIdAccesso());
+		setDataOra(accesso.getDataOra());
+		setMatricola(accesso.getMatricola());
 	}
 	
 	//GETTER E SETTER
+	/**
+	 * Metodo di tipo getter che restituisce l'identificativo dell'accesso
+	 * @return idAccesso che rappresenta l'identificativo
+	 */
 	public int getIdAccesso() 
 	{
 		return idAccesso;
 	}
+	
+	/**
+	 * Metodo di tipo setter che permette di settare l'identificativo dell'accesso
+	 * @param contaAccessi
+	 */
 	public void setIdAccesso(int contaAccessi) 
 	{
 		idAccesso=contaAccessi;
 	}
+	
+	/**
+	 * Metodo di tipo getter che restituisce la matricola
+	 * @return matricola che rappresenta la matricola del dipendente a cui si riferisce l'accesso
+	 */
 	public int getMatricola() 
 	{
 		return matricola;
 	}
+	
+	/**
+	 * Metodo  setter che permette di settare la matricola
+	 * @param matricola che rappresenta la matrciola da settare, ovvero da assegnare all'accesso
+	 */
 	public void setMatricola(int matricola) 
 	{
 		this.matricola =matricola;
 	}
 	
+	/**
+	 * Metodo getter che restituisce la data dell'accesso
+	 * @return DataOra che rappreenta la Data e l'orario in cui è stato registrato l'accesso
+	 */
 	public LocalDateTime getDataOra() 
 	{
 		return DataOra;
 	}
+	
+	/**
+	 * Metodo setter che permette di settare la data e l'ora dell'accesso
+	 * @param dataOra che rappresenta la data e l'ora da assegnare all'accesso
+	 */
 	public void setDataOra(LocalDateTime dataOra) 
 	{
 		this.DataOra = dataOra;
 	}
 	
-	
-	
 	//ALTRI METODI
+	/**
+	 * Metodo toString che restituisce una stringa composta
+	 * dalla data, l'ora, la matricola e l'identificativo dell'accesso
+	 */
 	public String toString()
 	{
 		return getMatricola()+". Data e ora: "+getDataOra()+" Id Accesso: "+getIdAccesso();

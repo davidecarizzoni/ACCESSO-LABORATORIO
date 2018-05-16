@@ -9,7 +9,14 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-
+/**
+ * La classe rappresenta un Laboratotio, in particolare gli accessi dei dipendenti al laboratorio
+ * gli attributi sono: il puntatore head di tipo nodo e il numero di elementi(Accessi) del laboratorio
+ * La classe mette a disposizione tutti i metodi necessari per òa gestione degli accessi
+ *  
+ * @author Davide Carizzoni
+ * @version 1.0
+ */
 public class Laboratorio implements Serializable
 {
 	//ATTRIBUTI
@@ -17,6 +24,9 @@ public class Laboratorio implements Serializable
 	private int elementi;
 	
 	//COTRUTTORE
+	/**
+	 * Metodo costruttore. Consente di creare un Laboratorio vuoto,senza alcun accesso
+	 */
 	public Laboratorio()
 	{
 		head=null;
@@ -24,12 +34,22 @@ public class Laboratorio implements Serializable
 	}
 
 	//GETTER
+	/**
+	 * Metodo di tipo getter che restituisce il numero di elementi di cui è composto il Laboratorio, ossia il numero di accessi registrati
+	 * @return elementi, rappresenta il numero di accessi registrati nel Laboratorio in una determinata data
+	 */
 	public int getElementi()
 	{
 		return elementi;
 	}
 	
 	//ALTRI METODI
+	/**
+	 * Metodo privato che permette di creare un oggetto di nodo
+	 * @param info rappresenta la componente informativa , ossia un accesso
+	 * @param link rappresenta il reference al nodo successivo
+	 * @return nodo, che rappreenta il nodo creato
+	 */
 	private Nodo creaNodo(Accesso info, Nodo link)
 	{
 		Nodo nodo=new Nodo(info);
@@ -38,6 +58,12 @@ public class Laboratorio implements Serializable
 	}
 	
 	//restituisce reference a nodo in posizione
+	/**
+	 * Metodo privato che restituisce un oggetto di tipo nodo in una detrminata posizione
+	 * @param posizione rappresenta la posizine di cui si vuole ricavare il nodo
+	 * @return p che rappresenta il nodo che i ottiene nella posizione desiderata
+	 * @throws LaboratorioException eccezione che si verifica quando la posizione non è valida o la lista è vuota
+	 */
 	private Nodo getLinkPosizione(int posizione) throws LaboratorioException
 	{
 		
@@ -61,13 +87,39 @@ public class Laboratorio implements Serializable
 	}
 
 	//Inserimento sempre in testa
+	/**
+	 * Metodo che permette di inserire un accesso in testa
+	 * @param info rappresenta la componente informativa, ossia un accesso
+	 */
 	public void registraAccesso(Accesso info)
 	{
-		Nodo p=creaNodo(info, head);
-		head=p;
+		Nodo p=creaNodo(info, head);//nodo p punta a heda
+		head=p;//head andrà a puntare a p
 		elementi++;
 	}
-
+	
+	/**
+	 * Metodo che permette di inserire un accesso in coda
+	 * @param info rappresenta la componente informativa, ossia un accesso
+	 * @throws LaboratorioException eccezione che si verifica quando la lista è vuota
+	 */
+	public void reistraAccessoInCoda(Accesso info) throws LaboratorioException 
+	{
+		if(elementi==0)
+		{
+			registraAccesso(info);
+			return;
+		}
+		
+		Nodo pn=creaNodo(info, null);//crea nodo con dentro persona
+		Nodo p=getLinkPosizione(elementi);
+		p.setLink(pn);//punta a pn
+		elementi++;	
+	}
+	
+	/**
+	 * Metodo che restituisce una stringa formata da tutti gli accessi con i relativi dati
+	 */
 	public String toString()
 	{
 		String risultato="Head \n";
@@ -78,10 +130,16 @@ public class Laboratorio implements Serializable
 		{
 			risultato+="-->Matricola: "+p.getInfo().toString()+"\n";
 			p=p.getLink();
-	}
+		}
 		return risultato;
 	}
 
+	/**
+	 * Metodo che permette di inserire un accesso,ovvero di creare un nodo in una determinata posizione della lista
+	 * @param accesso rappresenta l'Accesso da inserire nella posizione
+	 * @param posizione rappresenta la posizione nella quale inserire l'oggetto di tipo Accesso
+	 * @throws LaboratorioException eccezione che si verifica se la posizione non è valida
+	 */
 	public void inserisciInPosizione(Accesso accesso , int posizione) throws LaboratorioException 
 	{
 		if(posizione==1 )
@@ -101,6 +159,10 @@ public class Laboratorio implements Serializable
 		elementi++;
 	}
 	
+	/**
+	 * Metodo che  consente di eliminare l'elemento in testa alla lista 
+	 * @throws LaboratorioException eccezione che si verifica quando la lista è vuota
+	 */
 	public void eliminaInTesta() throws LaboratorioException 
 	{
 		if(elementi==0)
@@ -110,6 +172,10 @@ public class Laboratorio implements Serializable
 		elementi--;
 	}
 	
+	/**
+	 * Metodo che consente di eliminare l'elemento in coda alla lista
+	 * @throws LaboratorioException eccezione che si verifica quando la posizione è vuota
+	 */
 	public void eliminaInCoda() throws LaboratorioException 
 	{
 		if(elementi==0)
@@ -136,6 +202,11 @@ public class Laboratorio implements Serializable
 	//	}
 	}
 	
+	/**
+	 * Metodo che consente di eliminare un elemento,ossia un nodo della lista nella posizione desiderata
+	 * @param posizione rappresenta la posizione nella quale si vuole effetuare l'eliminazione del nodo
+	 * @throws LaboratorioException eccezione che si verifica quando la lista è vuota o la posizione non è valida
+	 */
 	public void eliminaInPosizione(int posizione) throws LaboratorioException
 	{
 		if(elementi==0)
@@ -163,7 +234,13 @@ public class Laboratorio implements Serializable
 	//	}
 	}
 	
-	public Accesso getAcesso(int posizione) throws LaboratorioException 
+	/**
+	 * Metodo che permette di recuperare i dati dell'accesso in una determinata posizione
+	 * @param posizione rappresenta la posizione nella quale si desidera recuperare i dati
+	 * @return i dati dell'accesso nella posizione desoderata
+	 * @throws LaboratorioException eccezione che si verifica quando la lista è vuota o la posizione non è valida
+	 */
+	public Accesso getAccesso(int posizione) throws LaboratorioException 
 	{
 		if(elementi==0)
 			throw new LaboratorioException("Lista vuota");
@@ -173,40 +250,14 @@ public class Laboratorio implements Serializable
 		return p.getInfo();
 	}
 
-	//verifica la presenza in una data inserendo la matricola di cui si vuole verificare la presenza
-	public boolean verificaAccessi(int matricola, LocalDate data) throws IOException, ClassNotFoundException, AccessoMatricolaNotFoundException
-	{
-			boolean presenza=false;
-		
-			String nomeFile="";
-			nomeFile="C:\\Users\\Davide Carizzoni\\Desktop\\Davide\\SCUOLA QUARTA SUPERIORE\\INFORMATICA\\JAVA\\Workspace-carizzoni\\ACCESSO LABORATORIO\\fileBIN\\"+data.getDayOfMonth()+"_"+data.getMonthValue()+"_"+data.getYear()+".bin";
-			
-			FileInputStream file=new FileInputStream(nomeFile);
-			ObjectInputStream reader=new ObjectInputStream(file);
-			
-			Laboratorio laboratorio;
-			laboratorio=(Laboratorio)reader.readObject();
-			file.close();
-			
-			if (elementi==0)
-				throw new AccessoMatricolaNotFoundException("Nessun accesso trovato con matricola "+matricola);
-			Nodo p=head;
-			while (p!=null)
-			{
-				if (p.getInfo().getMatricola()==matricola)
-				{
-					presenza=true;
-					return presenza;
-				}
-				p=p.getLink();
-			}
-			return presenza;
-			
-			
-
-	}
-
+	
+	
 	//SERIALIAZZAZIONE E DESERIALIZZAZIONE
+	/**
+	 * Metodo che consente di salvare il laboratorio in un file binario
+	 * @param data rappresenta la data di cui si desidera salvare gliaccessi, ossia il laboratorio
+	 * @throws IOException eccezione che si verifica per errori nella scrittura del file
+	 */
 	public void salvaLaboratorio(LocalDate data) throws IOException
 	{
 		String nomeFile="";
@@ -221,6 +272,13 @@ public class Laboratorio implements Serializable
 		
 	}
 	
+	/**
+	 * Metodo che consente di caricare un'oggetto ti tipo laboratorio effettuandone la deserializzazione da file binario
+	 * @param data rappresenta la data del file binario da deserializzare
+	 * @return il Laboratorio
+	 * @throws IOException eccezione che si verifica per errori durante il caricamento del laboratorio
+	 * @throws ClassNotFoundException eccezione che si verifica quando non è possibile deserializzare oggetti di tipo Laboratorio
+	 */
 	public Laboratorio CaricaLaboratorio(LocalDate data) throws IOException, ClassNotFoundException
 	{
 		String nomeFile="";
@@ -234,10 +292,49 @@ public class Laboratorio implements Serializable
 		file.close();
 		return laboratorio;
 	}
-
+	/**
+	 * Metodo che consente di salvare il laboratorio in un file binario
+	 * @param nomeFile rappresenta il nome del file sul quale si vuole salvare l'oggetto
+	 * @throws IOException eccezione che si verifica per errori nella scrittura del file
+	 */
+	public void salvaLaboratorio(String nomeFile) throws IOException
+	{
+		FileOutputStream file=new FileOutputStream(nomeFile);
+		ObjectOutputStream writer=new ObjectOutputStream(file);
+		
+		writer.writeObject(this);
+		writer.flush();
+		writer.close();
+		
+	}
+	
+	/**
+	 *  Metodo che consente di caricare un'oggetto ti tipo laboratorio effettuandone la deserializzazione da file binario
+	 * @param nomeFile rappresenta il file da cui si effettua la deserializzazione
+	 * @return il Laboratorio
+	 * @throws IOException eccezione che si verifica per errori durante il caricamento del laboratorio
+	 * @throws ClassNotFoundException eccezione che si verifica quando non è possibile deserializzare oggetti di tipo Laboratorio
+	 */
+	public Laboratorio CaricaLaboratorio(String nomeFile) throws IOException, ClassNotFoundException
+	{
+		FileInputStream file=new FileInputStream(nomeFile);
+		ObjectInputStream reader=new ObjectInputStream(file);
+		
+		Laboratorio laboratorio;
+		laboratorio=(Laboratorio)reader.readObject();
+		file.close();
+		return laboratorio;
+	}
 	//SALVATAGGIO FILE DI TESTO LISTA ORDINATA PER ORA D'ACCESSO, da più vecchio a più giovane orario
 
-	public void esportaLaboratorioCSV(LocalDate data) throws FileException, IOException, LaboratorioException
+	/**
+	 * Metodo che permette di salvare i dati del Laboratorio su un file di testo in formato CSV
+	 * @param data rappresenta la data per la quale si vogliono slavare gli accessi
+	 * @throws IOException eccezione che si verifica per errori durante la scrittura su file
+	 * @throws FileException ecczione che si verifica se si prova a leggere
+	 * @throws LaboratorioException eccezione che si verifica se la lista di cui si vogliono salvare i dati è vuota
+	 */
+	public void esportaLaboratorioCSV(LocalDate data) throws  IOException, LaboratorioException, FileException
 	{
 		String nomeFile="";
 		nomeFile="C:\\Users\\Davide Carizzoni\\Desktop\\Davide\\SCUOLA QUARTA SUPERIORE\\INFORMATICA\\JAVA\\Workspace-carizzoni\\ACCESSO LABORATORIO\\fileTXT\\"+data.getDayOfMonth()+"_"+data.getMonthValue()+"_"+data.getYear()+".txt";
@@ -245,10 +342,12 @@ public class Laboratorio implements Serializable
 		TextFile file=new TextFile(nomeFile,'W');
 		String accessoCSV;
 		Accesso accesso;
-		
+		if(getElementi()==0)
+			throw new LaboratorioException("Lista vuota, impossibile completare l'operazione");
+			
 		for (int i = 1; i <=getElementi(); i++) 
 		{
-			accesso=getAcesso(i);
+			accesso=getAccesso(i);
 			accessoCSV=accesso.getMatricola()+";"+accesso.getDataOra()+";"+accesso.getIdAccesso()+";";
 			file.toFile(accessoCSV);
 		}

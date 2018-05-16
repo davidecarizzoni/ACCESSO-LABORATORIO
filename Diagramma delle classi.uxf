@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>450</x>
-      <y>120</y>
+      <x>490</x>
+      <y>20</y>
       <w>210</w>
       <h>150</h>
     </coordinates>
@@ -24,24 +24,26 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>30</x>
-      <y>30</y>
+      <x>10</x>
+      <y>10</y>
       <w>340</w>
       <h>280</h>
     </coordinates>
     <panel_attributes>Accesso
 --
 -int idAccesso
--int matricola???FACCIO CLASSE DIPENDENTE
--Data dataOraAcceso
+-static int contaAccessi
+-int matricola
+-LocalDateTime dataOra
 --
-+Accesso(in idAccesso:int, in matricola:int, in dataOraAccesso:Data)
++Accesso(in matricola:int, in dataOra:LocalDateTime)
++Accesso(in accesso:Accesso)
 +getIdAccesso():int
 +setIdAccesso(in idAccesso:int)
 +getMatricola():int
 +setMatricola(in Matricola:int)
-+getDataOraAccesso():Data
-+setDataOraAccesso(in dataOraAccesso:Data)
++getDataOra():Data
++setDataOra(in dataOra:LocalDateTime)
 +toString():String
 
 </panel_attributes>
@@ -50,43 +52,43 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>360</x>
-      <y>170</y>
-      <w>110</w>
+      <x>340</x>
+      <y>70</y>
+      <w>170</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>150.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
-      <y>150</y>
-      <w>80</w>
+      <x>690</x>
+      <y>50</y>
+      <w>120</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;70.0;60.0;70.0;60.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;70.0;100.0;70.0;100.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>540</x>
-      <y>260</y>
+      <x>580</x>
+      <y>160</y>
       <w>30</w>
-      <h>120</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>450</x>
-      <y>360</y>
-      <w>470</w>
-      <h>240</h>
+      <x>380</x>
+      <y>240</y>
+      <w>400</w>
+      <h>340</h>
     </coordinates>
     <panel_attributes>Laboratorio
 --
@@ -96,13 +98,20 @@
 +Laboratorio()
 +getElementi():int
 -creaNodo(in accesso:Accesso, in link:Nodo):Nodo
--getLinkPosizione(in posizione:int):Nodo ??devo fare i gettere e i setter
-+inserisciAccesso(in accesso:Accesso)
-+verificaPresenzaDipendente(in dataOraAccesso:Data):Dipendente
-+verificaPresenzaDipendente(in matricola:int):Dipendente
-+serializzazione(in nomeFile:String)
-+deserializzazione(in nomeFile:String):Laboratrio
-+salvaCSC(in nomeFile:String)
+-getLinkPosizione(in posizione:int):Nodo 
++registraAccesso(in info:Accesso)
++registraAccessoInCoda(in info:Accesso)
++inserisciInPosizione(in info:Accesso,in posizione:int)
++toString():String
++eliminaInTesta()
++eliminaInCoda()
++eliminaInPosizione(in posizione:int)
++getAccesso(in posizione:int):Accesso
++salvaLaboratorio(in dataOra:LocalDateTime)
++salvaLaboratorio(in nomeFile:String)
++CaricaLaboratorio(in dataOra:LocalDateTime):Laboratorio
++caricaLaboratorio(in nomeFile:String):Laboratrio
++esportaLaboratoroCSC(in dataOra:LocalDateTime)
 </panel_attributes>
     <additional_attributes/>
   </element>

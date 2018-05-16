@@ -24,29 +24,39 @@ public class Nodo implements Serializable
 		setInfo(accesso);
 		link = null;
 	}
-	//COSTRUTTORE DI COPIA
-	public Nodo(Nodo n)
-	{
-		setInfo(n.getInfo());
-		setLink(n.getLink());
-	}
 	
+	/**
+	 * Metodo di tipo getter che restituisce la componente informativa del nodo, ossia un Accesso
+	 * @return info cge rappresenta un oggetto Accesso
+	 */
 	public Accesso getInfo() 
 	{
 		return info;
 	}
-
+	
+	/**
+	 * Metodo di tipo setter che permette di settare la componente informativa del nodo
+	 * @param info rappresenta l'Accesso che rappresenterà la componente in formativa del nodo
+	 */
 	public void setInfo(Accesso info) 
 	{
 		this.info = new Accesso(info);
 		
 	}
-
+	
+	/**
+	 * Metodo di tipo getter che ritorna il link del nodo
+	 * @return link rappresenta il reference al nodo successivo
+	 */
 	public Nodo getLink()
 	{
 		return link;
 	}
 
+	/**
+	 * Metodo setter che permette di settare il link di un nodo
+	 * @param link rappresenza il reference al nodo successivo che si vuole far assumere  al nodo
+	 */
 	public void setLink(Nodo link)
 	{
 		this.link = link;

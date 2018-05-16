@@ -2,6 +2,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * Classe per le operazioni di input dalla tastiera
+ * @author Davide Carizzoni
+ *
+ */
 public class ConsoleInput 
 {
 	private InputStreamReader input;
