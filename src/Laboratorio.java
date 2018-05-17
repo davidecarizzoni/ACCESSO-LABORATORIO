@@ -23,6 +23,8 @@ public class Laboratorio implements Serializable
 	private Nodo head;
 	private int elementi;
 	
+	public static final String workingDir = System.getProperty("user.dir")+"\\fileBIN\\"; //directory del progetto corrente
+	
 	//COTRUTTORE
 	/**
 	 * Metodo costruttore. Consente di creare un Laboratorio vuoto,senza alcun accesso
@@ -44,6 +46,33 @@ public class Laboratorio implements Serializable
 	}
 	
 	//ALTRI METODI
+	/**
+	 * Metodo di tipo getter che restituisce una stringa
+	 * @return workingDir che rappresenta il percorso dei progeti
+	 */
+	public static String getDirectoryCorrente()
+	{
+		return workingDir;
+	}
+	
+	/**
+	 * Elenca le date presenti nel file system nella cartella fileBIN
+	 * @return una stringa contenente il nome dei file salvati. Il nome del progetto coincide con la data
+	 * del file binario dove sono salvati gli acessi per quella data
+	 */
+	//elenco dei file binari di progetto presenti nella cartella elencoProgetti
+	public static String[] elencaDate()
+	{
+		File filesPresenti=new File(workingDir); //classe File, crea una rappresentazione astratta dei file in una directory
+						
+		int numeroFilesPresenti=filesPresenti.list().length;
+		String[] elencoDate=new String[numeroFilesPresenti];
+		elencoDate=filesPresenti.list();
+		for (int i = 0; i < numeroFilesPresenti; i++)
+			elencoDate[i]=elencoDate[i].substring(0, elencoDate[i].length()-4); //tolgo l'estensione.bin ai nomi dei file
+		return elencoDate;		
+	}
+	
 	/**
 	 * Metodo privato che permette di creare un oggetto di nodo
 	 * @param info rappresenta la componente informativa , ossia un accesso
@@ -103,7 +132,7 @@ public class Laboratorio implements Serializable
 	 * @param info rappresenta la componente informativa, ossia un accesso
 	 * @throws LaboratorioException eccezione che si verifica quando la lista è vuota
 	 */
-	public void reistraAccessoInCoda(Accesso info) throws LaboratorioException 
+	public void registraAccessoInCoda(Accesso info) throws LaboratorioException 
 	{
 		if(elementi==0)
 		{
@@ -136,15 +165,15 @@ public class Laboratorio implements Serializable
 
 	/**
 	 * Metodo che permette di inserire un accesso,ovvero di creare un nodo in una determinata posizione della lista
-	 * @param accesso rappresenta l'Accesso da inserire nella posizione
+	 * @param info rappresenta la componente informativa, ossia un accesso da inserire nella posizione
 	 * @param posizione rappresenta la posizione nella quale inserire l'oggetto di tipo Accesso
 	 * @throws LaboratorioException eccezione che si verifica se la posizione non è valida
 	 */
-	public void inserisciInPosizione(Accesso accesso , int posizione) throws LaboratorioException 
+	public void inserisciInPosizione(Accesso info , int posizione) throws LaboratorioException 
 	{
 		if(posizione==1 )
 		{
-			registraAccesso(accesso);
+			registraAccesso(info);
 			return;
 		}
 		
@@ -152,7 +181,7 @@ public class Laboratorio implements Serializable
 			throw new LaboratorioException("Posizione non valida");
 		
 		
-		Nodo pn=creaNodo(accesso, getLinkPosizione(posizione));
+		Nodo pn=creaNodo(info, getLinkPosizione(posizione));
 		Nodo precedente=getLinkPosizione(posizione-1);
 		
 		precedente.setLink(pn);//il link del precedente punta a pn, che è  quello che inseriamo
@@ -250,7 +279,16 @@ public class Laboratorio implements Serializable
 		return p.getInfo();
 	}
 
-	
+	public boolean verificaPresenza(int matricola) throws LaboratorioException
+	{
+		boolean presenza=false;
+		for (int i = 1; i < getElementi()+1; i++) 
+		{
+			if(matricola==getAccesso(i).getMatricola())
+				presenza=true;
+		}
+		return presenza;
+	}
 	
 	//SERIALIAZZAZIONE E DESERIALIZZAZIONE
 	/**

@@ -94,9 +94,12 @@
 --
 -Nodo head
 -int elementi
+-String final static workingDir;
 --
 +Laboratorio()
 +getElementi():int
++getDirectoryCorrente():String
++elencaDate():String
 -creaNodo(in accesso:Accesso, in link:Nodo):Nodo
 -getLinkPosizione(in posizione:int):Nodo 
 +registraAccesso(in info:Accesso)

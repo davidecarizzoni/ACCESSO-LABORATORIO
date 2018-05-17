@@ -47,12 +47,25 @@ public class MainClass
 		//LABORATORIO
 		Accesso accesso;
 		Laboratorio l1=new Laboratorio();
+		String[] workingDir;
+		
 		do
 		{
 			scelta=menu.scelta();
 			switch (scelta)
 			{
 			case 1:
+				workingDir=Laboratorio.elencaDate();
+				if(workingDir.length>0)
+				{
+					System.out.println("Elenco dei file binari presenti");
+					for (int i = 0; i < workingDir.length; i++) 
+					{
+						System.out.println("->"+workingDir[i]);
+					}
+				}
+				else
+					System.out.println("Nessun file ancora presente");
 				System.out.println("INSERIRE LA DATA DI CUI SI VOGLIONO REGISTRARE GLI ACCESSI");
 				l1=new Laboratorio();
 					try {
@@ -87,11 +100,11 @@ public class MainClass
 					System.out.println("Orario: "+ora.toString());
 					dataOra=LocalDateTime.of(data,ora);
 					accesso=new Accesso(matricola,dataOra);
-					l1.registraAccesso(accesso);
+					l1.registraAccesso(accesso);//Registra accesso sempre in testa
 					
 					System.out.println("Visualizzazione accessi: \n"+l1.toString());	
 					
-					System.out.print("Registrare un'altro accesso in  data " +data.toString()+"? ");
+					System.out.print("Registrare un'altro accesso in  data " +data.toString()+"? (si o no)");
 					try {
 						scelta1=tastiera.readString();
 					} catch (NumberFormatException e) {
@@ -110,6 +123,12 @@ public class MainClass
 				break;
 			
 			case 2:
+				workingDir=Laboratorio.elencaDate();
+				System.out.println("Elenco dei file binari presenti");
+				for (int i = 0; i < workingDir.length; i++) 
+				{
+					System.out.println("->"+workingDir[i]);
+				}
 				System.out.println("INSERIRE LA DATA DI CUI SI VOGLIONO CARICARE GLI ACCESSI");
 					try {
 						System.out.print("Giorno: ");
@@ -134,12 +153,22 @@ public class MainClass
 						System.out.println(l1.toString());
 					} catch (ClassNotFoundException e) {
 						System.out.println("Impossibile caricare oggetti di tipo laboratorio");
-					} catch (IOException e) {
+						
+					
+					} catch (IOException e) 
+					{
 						System.out.println("Impossibile completare il caricamento degli accessi");
+					
 					}
 				break;
-/*			
+			
 			case 3:
+				workingDir=Laboratorio.elencaDate();
+				System.out.println("Elenco dei file binari presenti");
+				for (int i = 0; i < workingDir.length; i++) 
+				{
+					System.out.println("->"+workingDir[i]);
+				}
 				System.out.println("INSERIRE LA DATA DI CUI SI VUOLE VERIFICARE LA PRESENZA");
 					try {
 						System.out.print("Giorno: ");
@@ -167,15 +196,25 @@ public class MainClass
 					}					
 				System.out.println("INSERIRE LA MATRICOLA DEL DIPENDENTE DI CUI SI VOGLIONO VERIFICARE LE PRESENZE");
 					try {
-						System.out.print("Matricola");
+						System.out.print("Matricola: ");
 						matricola=tastiera.readInt();
+						
 					} catch (NumberFormatException e1) {
 						System.out.println("Formato dato inserito errato");
 					} catch (IOException e1) {
 						System.out.println("Impossibile leggere da tastiera");
 					}
+					
+				try {
+					if(l1.verificaPresenza(matricola)==true)
+						System.out.println("Sono presenti accessi del dipendente con matricola " +matricola+ ". PRESENZA VERIFICATA!");
+					else
+						System.out.println("Nessun accesso presente per il dipendente con matricola " +matricola+ ". ");
 				break;
-	*/			
+				} catch (LaboratorioException e1) {
+					e1.toString();
+				}
+			
 			case 4:
 				Laboratorio l2=new Laboratorio();
 				System.out.println("SALVA ACCESSI IN UN FILE DI TESTO IN ORDINE CRESCENTE");
@@ -218,6 +257,7 @@ public class MainClass
 				break;
 			}
 		}while(scelta!=0);
+		System.out.println("SEI USCITO,BYE BYE");
 		
 	}
 
