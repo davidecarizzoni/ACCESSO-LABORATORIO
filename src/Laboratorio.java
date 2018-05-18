@@ -278,7 +278,7 @@ public class Laboratorio implements Serializable
 		Nodo p=getLinkPosizione(posizione);
 		return p.getInfo();
 	}
-
+/*
 	public boolean verificaPresenza(int matricola) throws LaboratorioException
 	{
 		boolean presenza=false;
@@ -288,6 +288,26 @@ public class Laboratorio implements Serializable
 				presenza=true;
 		}
 		return presenza;
+	}
+	*/
+	
+	/**
+	 * Metodo che consente di verificare la presenza di un dipendente in un determinato giorno inserendo la matricola
+	 * @param matricola rappresenta la matricola del dipendente di cui si vuole verificare la presenza
+	 * @return true se la presenza è verificata
+	 * @throws LaboratorioException eccezione che si verifica se la lista è vuota
+	 * @throws AccessoMatricolaNotFoundException eccezione sollevata quando non viene verificata la presenza di un dipendente in una determinata giornata
+	 */
+	public boolean verificaPresenza(int matricola) throws LaboratorioException, AccessoMatricolaNotFoundException
+	{
+		
+		for (int i = 1; i < getElementi()+1; i++) 
+		{
+			if(matricola==getAccesso(i).getMatricola())
+				return true;
+		}
+		throw new AccessoMatricolaNotFoundException("Nessun accesso presente per il dipendente con matricola " +matricola+ " ");
+	
 	}
 	
 	//SERIALIAZZAZIONE E DESERIALIZZAZIONE

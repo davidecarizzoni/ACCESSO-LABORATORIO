@@ -17,7 +17,7 @@ public class Nodo implements Serializable
 	 * Costruttore della classe nodo. Consente di istanziare un oggetto di tipo nodo.
 	 * richiede un invitato, che rappresenta l'atributo info della classe nodo.
 	 * 
-	 * @param persona è un oggetto di tipo persona
+	 * @param accesso rappresenta di tipo acesso
 	 */
 	public Nodo(Accesso accesso)
 	{

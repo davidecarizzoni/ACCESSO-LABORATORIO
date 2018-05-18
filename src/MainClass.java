@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -20,8 +21,8 @@ public class MainClass
 		LocalTime ora2=LocalTime.of(16,34,0);
 		LocalDateTime dataOra2=LocalDateTime.of(data,ora2);
 	*/	
-		String[] vociMenu= {"1-->Registra accesso..richiesta serializzazione a fine operazione", 
-							"2-->Deserializzazione per data",
+		String[] vociMenu= {"1-->Registra accesso..richiesta salvataggio su file(serializzazione) a fine operazione", 
+							"2-->Caricamento accessi per data(deserializzazione)",
 							"3-->Verifica presenza dipendente in una determinata data",
 							"4-->Salva accessi in un file di testo in ordine crescente di orario",
 							"5-->Visualizza accessi di una data in ordine crescente di orario",
@@ -58,31 +59,46 @@ public class MainClass
 				workingDir=Laboratorio.elencaDate();
 				if(workingDir.length>0)
 				{
-					System.out.println("Elenco dei file binari presenti");
+					System.out.println("Elenco delle giornate presenti:");
 					for (int i = 0; i < workingDir.length; i++) 
 					{
 						System.out.println("->"+workingDir[i]);
 					}
 				}
 				else
-					System.out.println("Nessun file ancora presente");
 				System.out.println("INSERIRE LA DATA DI CUI SI VOGLIONO REGISTRARE GLI ACCESSI");
 				l1=new Laboratorio();
-					try {
-						System.out.print("Giorno: ");
-						gg=tastiera.readInt();
-						System.out.print("Mese: ");
-						mm=tastiera.readInt();
-						System.out.print("Anno: ");
-						aa=tastiera.readInt();
-					}catch (NumberFormatException e) {
-						System.out.println("Formato dato inserito errato");
-					} catch (IOException e) {
-						System.out.println("Impossibile leggere da tastiera");
-					}
-					data= LocalDate.of(aa, mm, gg);	
-					System.out.println("DATA INSERITA->"+data.toString());
-				
+					boolean dataOK=true;
+					do {
+						
+						try {
+							System.out.print("Giorno: ");
+							gg=tastiera.readInt();
+							System.out.print("Mese: ");
+							mm=tastiera.readInt();
+							System.out.print("Anno: ");
+							aa=tastiera.readInt();
+						}catch (NumberFormatException e) {
+							System.out.println("Formato dato inserito errato");
+						} catch (IOException e) {
+							System.out.println("Impossibile leggere da tastiera");
+						}
+						try {
+							data= LocalDate.of(aa, mm, gg);	
+						} catch (DateTimeException e) {
+							System.out.println("Errore nell'inserimento data, reinserirla!");
+							dataOK=false;
+						} 
+						try
+						{
+							System.out.println("DATA INSERITA->"+data.toString());
+							break;
+						}catch (NullPointerException e) {
+							
+						}
+						
+					} while (dataOK==false);
+					
 				String scelta1 = null;
 				do
 				{
@@ -124,28 +140,45 @@ public class MainClass
 			
 			case 2:
 				workingDir=Laboratorio.elencaDate();
-				System.out.println("Elenco dei file binari presenti");
-				for (int i = 0; i < workingDir.length; i++) 
+				if(workingDir.length==0)
+					System.out.println("Nessun data con accessi presente, impossibile effettuare l'operazione di caricamento.");
+				else
 				{
-					System.out.println("->"+workingDir[i]);
-				}
-				System.out.println("INSERIRE LA DATA DI CUI SI VOGLIONO CARICARE GLI ACCESSI");
-					try {
-						System.out.print("Giorno: ");
-						gg=tastiera.readInt();
-						System.out.print("Mese: ");
-						mm=tastiera.readInt();
-						System.out.print("Anno: ");
-						aa=tastiera.readInt();
-					}catch (NumberFormatException e) {
-						System.out.println("Formato dato inserito errato");
-					} catch (IOException e) {
-						System.out.println("Impossibile leggere da tastiera");
+					System.out.println("Elenco delle giornate presenti:");
+					for (int i = 0; i < workingDir.length; i++) 
+					{
+						System.out.println("->"+workingDir[i]);
 					}
-				
-				data= LocalDate.of(aa, mm, gg);	
-				//String nomeFile="C:\\Users\\Davide Carizzoni\\Desktop\\Davide\\SCUOLA QUARTA SUPERIORE\\INFORMATICA\\JAVA\\Workspace-carizzoni\\ACCESSO LABORATORIO\\fileBIN\\"+data.getDayOfMonth()+"_"+data.getMonthValue()+"_"+data.getYear()+".bin";
-				System.out.println("DATA INSERITA->"+data.toString());
+					System.out.println("INSERIRE LA DATA DI CUI SI VOGLIONO CARICARE GLI ACCESSI");
+					boolean dataOK1=true;
+					do {
+						try {
+							System.out.print("Giorno: ");
+							gg=tastiera.readInt();
+							System.out.print("Mese: ");
+							mm=tastiera.readInt();
+							System.out.print("Anno: ");
+							aa=tastiera.readInt();
+						}catch (NumberFormatException e) {
+							System.out.println("Formato dato inserito errato");
+						} catch (IOException e) {
+							System.out.println("Impossibile leggere da tastiera");
+						}
+						try {
+							data= LocalDate.of(aa, mm, gg);	
+						} catch (DateTimeException e) {
+							System.out.println("Errore nell'inserimento data, reinserirla!");
+							dataOK1=false;
+						} 
+						try
+						{
+							System.out.println("DATA INSERITA->"+data.toString());
+							break;
+						}catch (NullPointerException e) {
+							
+						}
+					} while (dataOK1==false);
+					
 					try {
 						//l1.salvaLaboratorio(data);
 						l1=l1.CaricaLaboratorio(data);
@@ -153,67 +186,87 @@ public class MainClass
 						System.out.println(l1.toString());
 					} catch (ClassNotFoundException e) {
 						System.out.println("Impossibile caricare oggetti di tipo laboratorio");
-						
-					
-					} catch (IOException e) 
-					{
-						System.out.println("Impossibile completare il caricamento degli accessi");
-					
+					} catch (IOException e) {
+						System.out.println("Nessun accesso presente in data "+data.toString()+". Impossibile completare il caricamento degli accessi.");
 					}
+				
+				}
 				break;
 			
 			case 3:
 				workingDir=Laboratorio.elencaDate();
-				System.out.println("Elenco dei file binari presenti");
-				for (int i = 0; i < workingDir.length; i++) 
+				if(workingDir.length==0)
+					System.out.println("Nessun data con accessi presente, impossibile effettuare l'operazione di caricamento.");
+				else
 				{
-					System.out.println("->"+workingDir[i]);
-				}
-				System.out.println("INSERIRE LA DATA DI CUI SI VUOLE VERIFICARE LA PRESENZA");
-					try {
-						System.out.print("Giorno: ");
-						gg=tastiera.readInt();
-						System.out.print("Mese: ");
-						mm=tastiera.readInt();
-						System.out.print("Anno: ");
-						aa=tastiera.readInt();
-					}catch (NumberFormatException e) {
-						System.out.println("Formato dato inserito errato");
-					} catch (IOException e) {
-						System.out.println("Impossibile leggere da tastiera");
+					System.out.println("Elenco delle giornate presenti:");
+					for (int i = 0; i < workingDir.length; i++) 
+					{
+						System.out.println("->"+workingDir[i]);
 					}
-				data= LocalDate.of(aa, mm, gg);	
-				System.out.println("DATA INSERITA->"+data.toString());
-					try {
-						//l1.salvaLaboratorio(data);
-						l1=l1.CaricaLaboratorio(data);
-						System.out.println("Caricamento degli accessi in data "+data.toString()+" eseguito con successo");
-						System.out.println(l1.toString());
-					} catch (ClassNotFoundException e) {
-						System.out.println("Impossibile caricare oggetti di tipo laboratorio");
-					} catch (IOException e) {
-						System.out.println("Impossibile completare il caricamento degli accessi");
-					}					
-				System.out.println("INSERIRE LA MATRICOLA DEL DIPENDENTE DI CUI SI VOGLIONO VERIFICARE LE PRESENZE");
-					try {
-						System.out.print("Matricola: ");
-						matricola=tastiera.readInt();
+					System.out.println("INSERIRE LA DATA DI CUI SI VUOLE VERIFICARE LA PRESENZA: ");
+					boolean dataOK2=true;
+					do {
+						try {
+							System.out.print("Giorno: ");
+							gg=tastiera.readInt();
+							System.out.print("Mese: ");
+							mm=tastiera.readInt();
+							System.out.print("Anno: ");
+							aa=tastiera.readInt();
+						}catch (NumberFormatException e) {
+							System.out.println("Formato dato inserito errato");
+						} catch (IOException e) {
+							System.out.println("Impossibile leggere da tastiera");
+						}
+						try {
+							data= LocalDate.of(aa, mm, gg);	
+						} catch (DateTimeException e) {
+							System.out.println("Errore nell'inserimento data, reinserirla!");
+							dataOK2=false;
+						} 
+						try
+						{
+							System.out.println("DATA INSERITA->"+data.toString());
+							break;
+						}catch (NullPointerException e) {
+							
+						}
+					} while (dataOK2==false);
+						try {
+							//l1.salvaLaboratorio(data);
+							l1=l1.CaricaLaboratorio(data);
+							System.out.println("Caricamento degli accessi in data "+data.toString()+" eseguito con successo");
+							System.out.println(l1.toString());
+						} catch (ClassNotFoundException e) {
+							System.out.println("Impossibile caricare oggetti di tipo laboratorio");
+						} catch (IOException e) {
+							System.out.println("Nessun accesso presente in data "+data.toString()+". Impossibile verificare la presenza.");
+							break;
+						}					
+					System.out.println("INSERIRE LA MATRICOLA DEL DIPENDENTE DI CUI SI VOGLIONO VERIFICARE LE PRESENZE");
+						try {
+							System.out.print("Matricola: ");
+							matricola=tastiera.readInt();
+							
+						} catch (NumberFormatException e1) {
+							System.out.println("Formato dato inserito errato");
+						} catch (IOException e1) {
+							System.out.println("Impossibile leggere da tastiera");
+						}
 						
-					} catch (NumberFormatException e1) {
-						System.out.println("Formato dato inserito errato");
-					} catch (IOException e1) {
-						System.out.println("Impossibile leggere da tastiera");
-					}
-					
-				try {
-					if(l1.verificaPresenza(matricola)==true)
-						System.out.println("Sono presenti accessi del dipendente con matricola " +matricola+ ". PRESENZA VERIFICATA!");
-					else
-						System.out.println("Nessun accesso presente per il dipendente con matricola " +matricola+ ". ");
-				break;
-				} catch (LaboratorioException e1) {
-					e1.toString();
+						try {
+						if(l1.verificaPresenza(matricola))
+							System.out.println("Sono presenti accessi del dipendente con matricola " +matricola+ " in data "+data.toString()+". PRESENZA VERIFICATA!");
+						} catch (LaboratorioException e1) {
+							System.out.println(e1.toString());
+						} catch (AccessoMatricolaNotFoundException e) {
+							System.out.println(e.toString()+"in data "+data.toString()+".");
+						}
 				}
+				
+				break;
+				
 			
 			case 4:
 				Laboratorio l2=new Laboratorio();
@@ -229,28 +282,31 @@ public class MainClass
 					System.out.println("Impossibile completare il salvataggio degli oggetti");
 				} catch (LaboratorioException e) {
 					System.out.println(e.toString());
-				//} catch (ClassNotFoundException e) {
-				//	System.out.println("Impossibile caricare oggetti di tipo laboratorio");
 				}
 				
 				break;
 			
 			case 5:
-				
-				System.out.println("VISUALIZZA ACCESSI IN BASE ALL'ORARIO");
-				try {
-					l1=Ordinatore.selectionSortCrescenteNodi(l1);
-					System.out.println("visualizzazione accessi con orario crescente");
-					System.out.println(l1.toString());
-				} catch (LaboratorioException e) {
-					System.out.println(e.toString());
-				} catch (ClassNotFoundException e) {
-					System.out.println("Impossibile caricare oggetti di tipo laboratorio");
-				} catch (IOException e) {
-					System.out.println("Impossibile completare il caricamento degli accessi");
-				} catch (FileException e) {
-					System.out.println("File non trovato");
+				if(l1.getElementi()==0)
+					System.out.println("Nessuna data presente, effettuare l'operazione di deserializzazione sulla data desiderata");
+				else
+				{
+					System.out.println("VISUALIZZA ACCESSI IN BASE ALL'ORARIO");
+					try {
+						l1=Ordinatore.selectionSortCrescenteNodi(l1);
+						System.out.println("visualizzazione accessi con orario crescente");
+						System.out.println(l1.toString());
+					} catch (LaboratorioException e) {
+						System.out.println(e.toString());
+					} catch (ClassNotFoundException e) {
+						System.out.println("Impossibile caricare oggetti di tipo laboratorio");
+					} catch (IOException e) {
+						System.out.println("Impossibile completare il caricamento degli accessi");
+					} catch (FileException e) {
+						System.out.println("File non trovato");
+					}
 				}
+				
 				break;
 				
 			default:

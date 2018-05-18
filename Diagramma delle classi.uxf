@@ -38,6 +38,7 @@
 --
 +Accesso(in matricola:int, in dataOra:LocalDateTime)
 +Accesso(in accesso:Accesso)
++Accesso()
 +getIdAccesso():int
 +setIdAccesso(in idAccesso:int)
 +getMatricola():int
@@ -88,7 +89,7 @@
       <x>380</x>
       <y>240</y>
       <w>400</w>
-      <h>340</h>
+      <h>410</h>
     </coordinates>
     <panel_attributes>Laboratorio
 --

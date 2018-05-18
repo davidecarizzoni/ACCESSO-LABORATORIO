@@ -48,6 +48,17 @@ public class Accesso implements Serializable
 		setMatricola(accesso.getMatricola());
 	}
 	
+	/**
+	 * Costruttore di default della classe Accesso. Istanzia un nuovo accesso vuoto
+	 */
+	//COSTRUTTORE DEFAULT
+		public Accesso()
+		{
+			setIdAccesso(0);
+			setDataOra(null);
+			setMatricola(0);
+		}
+	
 	//GETTER E SETTER
 	/**
 	 * Metodo di tipo getter che restituisce l'identificativo dell'accesso
