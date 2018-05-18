@@ -160,7 +160,7 @@ public class MainClass
 							System.out.print("Anno: ");
 							aa=tastiera.readInt();
 						}catch (NumberFormatException e) {
-							System.out.println("Formato dato inserito errato");
+							System.out.println("Formato dato inserito errato ");
 						} catch (IOException e) {
 							System.out.println("Impossibile leggere da tastiera");
 						}
