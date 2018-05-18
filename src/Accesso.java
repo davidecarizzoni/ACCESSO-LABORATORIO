@@ -124,6 +124,20 @@ public class Accesso implements Serializable
 		return getMatricola()+". Data e ora: "+getDataOra()+" Id Accesso: "+getIdAccesso();
 	}
 
+	/**
+	 * Metodo equals che verifica se 2 accessi sono uguali in base all'identificativo del progetto. Usato solo nel test
+	 * @param accesso rappresenta l'accesso da confrontare
+	 * @return true se sono uguali
+	 * @return false se sono diversi
+	 */
+	public boolean equals(Accesso accesso)
+	{
+		if (getIdAccesso()==accesso.getIdAccesso())
+			return true;
+		else
+			return false;
+	}
+	
 //	<-------------------------------------------PROVA ACCESSO----------------------------------------------------------->
 /*	public static void main(String[] args) 
 	{
