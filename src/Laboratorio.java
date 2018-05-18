@@ -12,7 +12,7 @@ import java.time.LocalTime;
 /**
  * La classe rappresenta un Laboratotio, in particolare gli accessi dei dipendenti al laboratorio
  * gli attributi sono: il puntatore head di tipo nodo e il numero di elementi(Accessi) del laboratorio
- * La classe mette a disposizione tutti i metodi necessari per òa gestione degli accessi
+ * La classe mette a disposizione tutti i metodi necessari per la gestione degli accessi
  *  
  * @author Davide Carizzoni
  * @version 1.0
@@ -43,6 +43,15 @@ public class Laboratorio implements Serializable
 	public int getElementi()
 	{
 		return elementi;
+	}
+	
+	/**
+	 * Metodo di tipo getter che restituisce il nodo puntato da head
+	 * @return head che rappresenta il nodo puntato
+	 */
+	public Nodo getHead()
+	{
+		return head;
 	}
 	
 	//ALTRI METODI
