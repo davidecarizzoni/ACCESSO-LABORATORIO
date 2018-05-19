@@ -21,7 +21,7 @@ public class MainClass
 		LocalTime ora2=LocalTime.of(16,34,0);
 		LocalDateTime dataOra2=LocalDateTime.of(data,ora2);
 	*/	
-		String[] vociMenu= {"1-->Registra accesso..richiesta salvataggio su file(serializzazione) a fine operazione", 
+		String[] vociMenu= {"1-->Registra accesso..richiesto salvataggio su file(serializzazione) a fine operazione", 
 							"2-->Caricamento accessi per data(deserializzazione)",
 							"3-->Verifica presenza dipendente in una determinata data",
 							"4-->Salva accessi in un file di testo in ordine crescente di orario",
@@ -67,7 +67,7 @@ public class MainClass
 				}
 				else
 					System.out.println("Nessuna data con accessi presente");
-				System.out.println("INSERIRE LA DATA DI CUI SI VOGLIONO REGISTRARE GLI ACCESSI");
+				System.out.println("INSERIRE LA DATA IN CUI SI VOGLIONO REGISTRARE GLI ACCESSI");
 				l1=new Laboratorio();
 					boolean dataOK;
 					do {
