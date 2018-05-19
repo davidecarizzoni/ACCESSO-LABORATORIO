@@ -160,13 +160,13 @@ public class Laboratorio implements Serializable
 	 */
 	public String toString()
 	{
-		String risultato="Head \n";
+		String risultato="";
 		if (elementi==0)
-			return risultato+="--> ";
+			return risultato;
 		Nodo p=head;
 		while (p!=null)
 		{
-			risultato+="-->Matricola: "+p.getInfo().toString()+"\n";
+			risultato+="-->"+p.getInfo().toString()+"\n";
 			p=p.getLink();
 		}
 		return risultato;
@@ -425,7 +425,23 @@ public class Laboratorio implements Serializable
 
 
 
-
+	public static void main(String[] args) throws LaboratorioException 
+	{
+		/*Laboratorio laboratorio=new Laboratorio();
+		LocalDate data= LocalDate.of(2018, 3, 1);
+		LocalTime ora=LocalTime.of(16,30,0);
+		LocalDateTime dataOra=LocalDateTime.of(data,ora);
+		Accesso a=new Accesso(1,dataOra);
+		laboratorio.registraAccesso(a);
+		System.out.println(laboratorio.toString());
+		System.out.println("-->"+a.toString());
+		if(laboratorio.toString().compareTo("-->"+a.toString())==0)
+			System.out.println("OK");
+		else
+			System.out.println("NO");*/
+	
+	}
+	
 
 
 
@@ -475,5 +491,6 @@ public class Laboratorio implements Serializable
 		}
 		
 	}*/
+	
 
 }

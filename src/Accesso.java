@@ -121,7 +121,7 @@ public class Accesso implements Serializable
 	 */
 	public String toString()
 	{
-		return getMatricola()+". Data e ora: "+getDataOra()+" Id Accesso: "+getIdAccesso();
+		return "Matricola: "+getMatricola()+". Data e ora: "+getDataOra()+" Id Accesso: "+getIdAccesso();
 	}
 
 	/**

@@ -66,11 +66,12 @@ public class MainClass
 					}
 				}
 				else
+					System.out.println("Nessuna data con accessi presente");
 				System.out.println("INSERIRE LA DATA DI CUI SI VOGLIONO REGISTRARE GLI ACCESSI");
 				l1=new Laboratorio();
-					boolean dataOK=true;
+					boolean dataOK;
 					do {
-						
+						dataOK=true;
 						try {
 							System.out.print("Giorno: ");
 							gg=tastiera.readInt();
@@ -88,11 +89,12 @@ public class MainClass
 						} catch (DateTimeException e) {
 							System.out.println("Errore nell'inserimento data, reinserirla!");
 							dataOK=false;
+							continue;
 						} 
 						try
 						{
 							System.out.println("DATA INSERITA->"+data.toString());
-							break;
+							//break;
 						}catch (NullPointerException e) {
 							
 						}
@@ -150,8 +152,9 @@ public class MainClass
 						System.out.println("->"+workingDir[i]);
 					}
 					System.out.println("INSERIRE LA DATA DI CUI SI VOGLIONO CARICARE GLI ACCESSI");
-					boolean dataOK1=true;
+					boolean dataOK1;;
 					do {
+						dataOK1=true;
 						try {
 							System.out.print("Giorno: ");
 							gg=tastiera.readInt();
@@ -169,11 +172,12 @@ public class MainClass
 						} catch (DateTimeException e) {
 							System.out.println("Errore nell'inserimento data, reinserirla!");
 							dataOK1=false;
+							continue;
 						} 
 						try
 						{
 							System.out.println("DATA INSERITA->"+data.toString());
-							break;
+							//break;
 						}catch (NullPointerException e) {
 							
 						}
@@ -204,9 +208,10 @@ public class MainClass
 					{
 						System.out.println("->"+workingDir[i]);
 					}
-					System.out.println("INSERIRE LA DATA DI CUI SI VUOLE VERIFICARE LA PRESENZA: ");
-					boolean dataOK2=true;
+					System.out.println("INSERIRE LA DATA IN CUI SI VUOLE VERIFICARE LA PRESENZA: ");
+					boolean dataOK2;
 					do {
+						dataOK2=true;
 						try {
 							System.out.print("Giorno: ");
 							gg=tastiera.readInt();
@@ -224,11 +229,12 @@ public class MainClass
 						} catch (DateTimeException e) {
 							System.out.println("Errore nell'inserimento data, reinserirla!");
 							dataOK2=false;
+							continue;
 						} 
 						try
 						{
 							System.out.println("DATA INSERITA->"+data.toString());
-							break;
+							//break;
 						}catch (NullPointerException e) {
 							
 						}
