@@ -36,10 +36,9 @@ public class MainClass
 		LocalDate data = null;
 		int aa = 0,mm = 0,gg = 0;
 		LocalTime ora;
-		int h,m,s;
 		
-		//PARAMETRI PER ACQUISIRE DIPENDENTE
-		String nominativo = null;
+		//PARAMETRI PER ACQUISIRE MATRICOLA
+		
 		int matricola = 0;
 		
 		//PARAMETRI PER ACQUISIRE ACCESSO
@@ -105,14 +104,21 @@ public class MainClass
 				do
 				{
 					System.out.println("INSERIRE LA MATRICOLA DEL DIPENDENTE DI CUI SI VUOLE REGISTRARE L'ACCESSO");
-					System.out.print("Matricola: ");
-					try {
-						matricola=tastiera.readInt();
-					} catch (NumberFormatException e) {
-						System.out.println("Formato dato inserito errato");
-					} catch (IOException e) {
-						System.out.println("Impossibile leggere da tastiera");
-					}
+					boolean matricolaOK1;
+					do {
+						matricolaOK1=true;
+						System.out.print("Matricola: ");
+						try {
+							matricola=tastiera.readInt();
+						} catch (NumberFormatException e) {
+							System.out.println("Formato dato inserito errato, reinserire");
+							matricolaOK1=false;
+							continue;
+						} catch (IOException e) {
+							System.out.println("Impossibile leggere da tastiera");
+						}
+					} while (matricolaOK1==false);
+					
 					
 					ora=LocalTime.now();
 					System.out.println("Orario: "+ora.toString());
@@ -234,7 +240,6 @@ public class MainClass
 						try
 						{
 							System.out.println("DATA INSERITA->"+data.toString());
-							//break;
 						}catch (NullPointerException e) {
 							
 						}
@@ -248,18 +253,23 @@ public class MainClass
 							System.out.println("Impossibile caricare oggetti di tipo laboratorio");
 						} catch (IOException e) {
 							System.out.println("Nessun accesso presente in data "+data.toString()+". Impossibile verificare la presenza.");
-							break;
 						}					
-					System.out.println("INSERIRE LA MATRICOLA DEL DIPENDENTE DI CUI SI VOGLIONO VERIFICARE LE PRESENZE");
+					System.out.println("INSERIRE LA MATRICOLA DEL DIPENDENTE DI CUI SI VOGLIONO VERIFICARE GLI ACCESSI");
+					boolean matricolaOK;
+					do {
+						matricolaOK=true;
 						try {
 							System.out.print("Matricola: ");
 							matricola=tastiera.readInt();
-							
 						} catch (NumberFormatException e1) {
-							System.out.println("Formato dato inserito errato");
+							System.out.println("Formato dato inserito errato, reinserire");
+							matricolaOK=false;
+							continue;
 						} catch (IOException e1) {
 							System.out.println("Impossibile leggere da tastiera");
 						}
+					} while (matricolaOK==false);
+						
 						
 						try {
 						if(l1.verificaPresenza(matricola))
@@ -288,19 +298,71 @@ public class MainClass
 					System.out.println("Impossibile completare il salvataggio degli oggetti");
 				} catch (LaboratorioException e) {
 					System.out.println(e.toString());
+				} catch (NullPointerException e) {
+					System.out.println("Nessuna giornata presente. efettuare l'operazione di caricamento sulla data desiderata ");
 				}
 				
 				break;
 			
 			case 5:
-				if(l1.getElementi()==0)
-					System.out.println("Nessuna data presente, effettuare l'operazione di deserializzazione sulla data desiderata");
+				workingDir=Laboratorio.elencaDate();
+				if(workingDir.length==0)
+					System.out.println("Nessun data con accessi presente, impossibile effettuare l'operazione di caricamento.");
 				else
 				{
-					System.out.println("VISUALIZZA ACCESSI IN BASE ALL'ORARIO");
+					System.out.println("Elenco delle giornate presenti:");
+					for (int i = 0; i < workingDir.length; i++) 
+					{
+						System.out.println("->"+workingDir[i]);
+					}
+					System.out.println("INSERIRE LA DATA DI CUI SI VOGLIONO CARICARE GLI ACCESSI");
+					boolean dataOK1;;
+					do {
+						dataOK1=true;
+						try {
+							System.out.print("Giorno: ");
+							gg=tastiera.readInt();
+							System.out.print("Mese: ");
+							mm=tastiera.readInt();
+							System.out.print("Anno: ");
+							aa=tastiera.readInt();
+						}catch (NumberFormatException e) {
+							System.out.println("Formato dato inserito errato ");
+						} catch (IOException e) {
+							System.out.println("Impossibile leggere da tastiera");
+						}
+						try {
+							data= LocalDate.of(aa, mm, gg);	
+						} catch (DateTimeException e) {
+							System.out.println("Errore nell'inserimento data, reinserirla!");
+							dataOK1=false;
+							continue;
+						} 
+						try
+						{
+							System.out.println("DATA INSERITA->"+data.toString());
+							//break;
+						}catch (NullPointerException e) {
+							
+						}
+					} while (dataOK1==false);
+					
+					try {
+						//l1.salvaLaboratorio(data);
+						l1=l1.CaricaLaboratorio(data);
+						System.out.println("Caricamento degli accessi in data "+data.toString()+" eseguito con successo");
+						//System.out.println(l1.toString());
+					} catch (ClassNotFoundException e) {
+						System.out.println("Impossibile caricare oggetti di tipo laboratorio");
+					} catch (IOException e) {
+						System.out.println("Nessun accesso presente in data "+data.toString()+". Impossibile completare il caricamento degli accessi.");
+					}
+				
+				}
+					System.out.println("VISUALIZZAZIONE ACCESSI IN ORDINE CRONOLOGICO CRESCENTE");
 					try {
 						l1=Ordinatore.selectionSortCrescenteNodi(l1);
-						System.out.println("visualizzazione accessi con orario crescente");
+						//System.out.println("visualizzazione accessi con orario crescente");
 						System.out.println(l1.toString());
 					} catch (LaboratorioException e) {
 						System.out.println(e.toString());
@@ -311,11 +373,12 @@ public class MainClass
 					} catch (FileException e) {
 						System.out.println("File non trovato");
 					}
-				}
+				
 				
 				break;
 				
 			default:
+				System.out.println("Opzione non disponibile, reinserire");
 				break;
 			}
 		}while(scelta!=0);

@@ -424,24 +424,27 @@ public class Laboratorio implements Serializable
 
 
 
-
+/*
 	public static void main(String[] args) throws LaboratorioException 
 	{
-		/*Laboratorio laboratorio=new Laboratorio();
+		Laboratorio laboratorio=new Laboratorio();
 		LocalDate data= LocalDate.of(2018, 3, 1);
 		LocalTime ora=LocalTime.of(16,30,0);
 		LocalDateTime dataOra=LocalDateTime.of(data,ora);
 		Accesso a=new Accesso(1,dataOra);
 		laboratorio.registraAccesso(a);
 		System.out.println(laboratorio.toString());
-		System.out.println("-->"+a.toString());
-		if(laboratorio.toString().compareTo("-->"+a.toString())==0)
+		String risultato1=a.toString();
+		String risultato=laboratorio.toString();
+		System.out.println(risultato);
+		
+		if(laboratorio.toString().compareTo(risultato)==0)
 			System.out.println("OK");
 		else
-			System.out.println("NO");*/
+			System.out.println("NO");
 	
 	}
-	
+	*/
 
 
 

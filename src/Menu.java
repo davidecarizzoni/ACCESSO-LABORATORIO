@@ -62,6 +62,10 @@ public class Menu
 			try 
 			{
 				scelta=tastiera.readInt();
+				if(scelta>=numeroVociMenu|| scelta<0)
+				{
+					System.out.println("Opzione non disponibile, reinserire");
+				}
 			} 
 			catch (NumberFormatException e) 
 			{

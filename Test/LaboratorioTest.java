@@ -44,9 +44,7 @@ public class LaboratorioTest {
 		LocalDateTime dataOra=LocalDateTime.now();
 		Accesso accesso=new Accesso(1,dataOra);
 		laboratorio.registraAccesso(accesso);
-		System.out.println(laboratorio.getAccesso(1).toString());
-		System.out.println(accesso.toString());
-		assertTrue(laboratorio.getAccesso(1).toString().compareToIgnoreCase("-->"+accesso.toString()+"\n")==0);
+		assertTrue(laboratorio.toString().compareToIgnoreCase("-->"+accesso.toString()+"\n")==0);
 		
 	}
 	
@@ -65,8 +63,7 @@ public class LaboratorioTest {
 		LocalDateTime dataOra=LocalDateTime.now();
 		Accesso accesso=new Accesso(1,dataOra);
 		laboratorio.registraAccesso(accesso);
-		assertEquals("getAccesso", accesso, laboratorio.getAccesso(1));
-		//assertTrue("getAccesso",laboratorio.getAccesso(1)==accesso);
+		assertTrue("getAccesso",laboratorio.getAccesso(1).getIdAccesso()==accesso.getIdAccesso() && laboratorio.getAccesso(1).getMatricola()==accesso.getMatricola()   && laboratorio.getAccesso(1).getDataOra()==accesso.getDataOra() );
 	}
 	
 	@Test (expected=LaboratorioException.class)
@@ -122,26 +119,41 @@ public class LaboratorioTest {
 	@Test
 	public void testSalvaCaricaLaboratorio() throws IOException, ClassNotFoundException 
 	{
-		Laboratorio l=new Laboratorio();
+		Laboratorio laboratorio=new Laboratorio();
 		LocalDate data=LocalDate.now();
 		LocalTime ora=LocalTime.now();
 		LocalDateTime dataOra=LocalDateTime.of(data, ora);
 		Accesso accesso=new Accesso(1,dataOra);
-		l.registraAccesso(accesso);
-		l.salvaLaboratorio(data);
-		Laboratorio lcopia=l.CaricaLaboratorio(data);
-		assertTrue("Serializzazione e Deserializzzazione",l.toString().compareTo(lcopia.toString())==0);
+		laboratorio.registraAccesso(accesso);
+		laboratorio.salvaLaboratorio(data);
+		Laboratorio lcopia=laboratorio.CaricaLaboratorio(data);
+		assertTrue("Salva e carica laboratorio",laboratorio.toString().compareTo(lcopia.toString())==0);
 	}
-	
-	//DA FINIRE
-	@Test
-	public void testEsportaLaboratorioCSV()
+/*	
+	@Test (expected=IOException.class)
+	public void testCaricaLaboratorioEccezione() throws IOException, ClassNotFoundException 
 	{
-		Laboratorio l=new Laboratorio();
+		Laboratorio laboratorio=new Laboratorio();
+		LocalDate data=LocalDate.of(28,2,2015);//Non deve essere già presente un file con questa data altrimenti non si verfifica la condizione del file non presente
+		laboratorio.CaricaLaboratorio(data);
+	}
+*/	
+	@Test
+	public void testEsportaLaboratorioCSV() throws IOException, LaboratorioException, FileException
+	{
+		Laboratorio laboratorio=new Laboratorio();
 		LocalDate data=LocalDate.now();
 		LocalTime ora=LocalTime.now();
 		LocalDateTime dataOra=LocalDateTime.of(data, ora);
 		Accesso accesso=new Accesso(1,dataOra);
+		laboratorio.registraAccesso(accesso);
+		laboratorio.esportaLaboratorioCSV(data);
+		String nomeFile="C:\\Users\\Davide Carizzoni\\Desktop\\Davide\\SCUOLA QUARTA SUPERIORE\\INFORMATICA\\JAVA\\Workspace-carizzoni\\ACCESSO LABORATORIO\\fileTXT\\"+data.getDayOfMonth()+"_"+data.getMonthValue()+"_"+data.getYear()+".txt";
+		TextFile file=new TextFile(nomeFile,'R');
+		String StringaLetta=file.fromFile();
+		String accessoCSV=accesso.getMatricola()+";"+accesso.getDataOra()+";"+accesso.getIdAccesso()+";";
+		assertTrue("EsportaLaboratorioCSV",StringaLetta.compareTo(accessoCSV)==0);
+		
 	}	
 	
 	@Test
@@ -150,6 +162,7 @@ public class LaboratorioTest {
 		Laboratorio l=new Laboratorio();
 		LocalDateTime dataOra=LocalDateTime.now();
 		Accesso accesso=new Accesso(1,dataOra);
+		l.registraAccesso(accesso);
 		assertEquals("VerificaPresenza",l.getAccesso(1).getMatricola(),1);
 	}	
 	
@@ -159,7 +172,8 @@ public class LaboratorioTest {
 		Laboratorio l=new Laboratorio();
 		LocalDateTime dataOra=LocalDateTime.now();
 		Accesso accesso=new Accesso(1,dataOra);
-		l.verificaPresenza(1);
+		l.registraAccesso(accesso);
+		l.verificaPresenza(2);
 	}	
 	
 	

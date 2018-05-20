@@ -31,6 +31,6 @@ public class NodoTest
 		Nodo nodo1=new Nodo(a);
 		Nodo nodo2=new Nodo(a1);
 		nodo1.setLink(nodo2);
-		assertTrue("setLink",nodo1.getInfo().equals(a1)&&nodo1.getLink()==nodo2);
+		assertTrue("setLink",nodo1.getInfo().equals(a1) && nodo1.getLink()==nodo2);
 	}
 }
