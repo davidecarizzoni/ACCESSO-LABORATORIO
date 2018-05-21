@@ -4,37 +4,21 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>510</x>
-      <y>30</y>
-      <w>210</w>
-      <h>150</h>
-    </coordinates>
-    <panel_attributes>Nodo
---
--info:Accesso
--link:Nodo
---
-+Nodo(in accesso:Accesso)
-+getInfo():Accesso
-+setInfo(in accesso:Accesso)
-+getLink():Nodo
-+setLink(in link:Nodo)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>30</x>
+      <x>20</x>
       <y>20</y>
       <w>340</w>
       <h>280</h>
     </coordinates>
-    <panel_attributes>Accesso
+    <panel_attributes>Intervento
 --
--idAccesso:int
--static contaAccessi:int
--matricola:int
--dataOra:LocalDateTime 
+-id:int
+-static contaInterventi:int
+-totPagare:double
+-nomecliente:String
+-nomebabysitter:String
+-inizioIntervento:LocalDateTime 
+-fineIntervento:LocalDateTime 
+-COSTO_ORARIO=13
 --
 +Accesso(in matricola:int, in dataOra:LocalDateTime)
 +Accesso(in accesso:Accesso)
@@ -54,7 +38,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>360</x>
+      <x>350</x>
       <y>70</y>
       <w>170</w>
       <h>40</h>
@@ -64,33 +48,73 @@
     <additional_attributes>10.0;20.0;150.0;20.0</additional_attributes>
   </element>
   <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>500</x>
+      <y>30</y>
+      <w>210</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Nodo
+--
+-Accesso info
+-Nodo link
+--
++Nodo(in accesso:Accesso)
++getInfo():Accesso
++setInfo(in accesso:Accesso)
++getLink():Nodo
++setLink(in link:Nodo)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
     <id>Relation</id>
     <coordinates>
-      <x>580</x>
-      <y>170</y>
-      <w>50</w>
-      <h>100</h>
+      <x>700</x>
+      <y>90</y>
+      <w>110</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>0..1</panel_attributes>
+    <additional_attributes>10.0;20.0;90.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>780</x>
+      <y>60</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>700</x>
+      <y>50</y>
+      <w>110</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-
-1...
-
-
-1</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+1           
+</panel_attributes>
+    <additional_attributes>10.0;20.0;90.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>400</x>
+      <x>390</x>
       <y>250</y>
       <w>400</w>
       <h>410</h>
     </coordinates>
     <panel_attributes>Laboratorio
 --
--head:Nodo
--elementi:int
--final static workingDir:String 
+-Nodo head
+-int elementi
+-String final static workingDir;
 --
 +Laboratorio()
 +getElementi():int
@@ -118,36 +142,16 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>710</x>
-      <y>50</y>
-      <w>110</w>
-      <h>50</h>
+      <x>570</x>
+      <y>170</y>
+      <w>50</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-
-1           
-</panel_attributes>
-    <additional_attributes>10.0;20.0;90.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>790</x>
-      <y>60</y>
-      <w>30</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>710</x>
-      <y>90</y>
-      <w>110</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>0..1</panel_attributes>
-    <additional_attributes>10.0;20.0;90.0;20.0</additional_attributes>
+1...
+
+
+1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
 </diagram>
