@@ -14,6 +14,8 @@ public class Accesso implements Serializable
 	//ATTRIBUTI
 	private int idAccesso;
 	private static int contaAccessi=0;
+	
+
 	private int matricola;
 	
 	private LocalDateTime DataOra;
@@ -112,6 +114,22 @@ public class Accesso implements Serializable
 	public void setDataOra(LocalDateTime dataOra) 
 	{
 		this.DataOra = dataOra;
+	}
+	
+	/**
+	 * Metodo ti tipo getter su un attributo statico che restituisce il valore del contatore degli accessi
+	 * @return contaAccessi, che rappresenta il contatore degli accessi
+	 */
+	public static int getContaAccessi() {
+		return contaAccessi;
+	}
+
+	/**
+	 * Metodo di tipo setter che permette di settare l'attributo statico contaAccessi
+	 * @param contaAccessi rappresenta il contatore statico degli accessi
+	 */
+	public static void setContaAccessi(int contaAccessi) {
+		Accesso.contaAccessi = contaAccessi;
 	}
 	
 	//ALTRI METODI

@@ -31,6 +31,8 @@ public class MainClass
 		ConsoleInput tastiera=new ConsoleInput();
 		Menu menu=new Menu("MENU'", vociMenu);
 		
+		int nAccessi=0;
+
 		//PARAMETRI PER ACQUISIRE DATA
 		int scelta;
 		LocalDate data = null;
@@ -38,7 +40,6 @@ public class MainClass
 		LocalTime ora;
 		
 		//PARAMETRI PER ACQUISIRE MATRICOLA
-		
 		int matricola = 0;
 		
 		//PARAMETRI PER ACQUISIRE ACCESSO
@@ -63,6 +64,25 @@ public class MainClass
 					{
 						System.out.println("->"+workingDir[i]);
 					}
+					for (int i = 0; i < workingDir.length; i++) 
+					{
+						//System.out.println(workingDir[i]);
+						String name="C:\\Users\\Davide Carizzoni\\Desktop\\Davide\\SCUOLA QUARTA SUPERIORE\\INFORMATICA\\JAVA\\Workspace-carizzoni\\ACCESSO LABORATORIO\\fileBIN\\"+workingDir[i]+".bin";
+						Laboratorio l3=new Laboratorio();
+						try {
+							l3=l3.CaricaLaboratorio(name);
+							//System.out.println(l3.getElementi());
+							nAccessi=nAccessi+l3.getElementi();
+						} catch (ClassNotFoundException e) {
+							System.out.println("Impossibile caricare oggetti di tipo laboratorio");e.printStackTrace();
+						} catch (IOException e) {
+							System.out.println("Nessun accesso presente");
+						}	
+						//nAccessi=nAccessi+l3.getElementi();
+						//nAccessi=8;
+						
+					}
+					Accesso.setContaAccessi(nAccessi);
 				}
 				else
 					System.out.println("Nessuna data con accessi presente");
@@ -379,7 +399,6 @@ public class MainClass
 						System.out.println("Nessun accesso presente in data "+data.toString()+". Impossibile completare il caricamento degli accessi per poi salvarli.");
 						break;
 					}
-				
 				try {
 					System.out.println("SALVATAGGIO ACCESSI IN UN FILE DI TESTO IN ORDINE CRESCENTE");
 					l2=Ordinatore.selectionSortCrescente(l1);
@@ -429,7 +448,7 @@ public class MainClass
 				break;
 			}
 		}while(scelta!=0);
-		System.out.println("SEI USCITO,BYE BYE");
+		System.out.println("SEI USCITO!");
 		
 	}
 

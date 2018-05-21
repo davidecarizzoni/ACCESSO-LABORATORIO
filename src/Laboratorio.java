@@ -117,7 +117,7 @@ public class Laboratorio implements Serializable
 			
 		while(p.getLink()!=null && n<posizione)
 		{
-			p=p.getLink();	//p va a puntare al nodo successivo
+			p=p.getLink();	//p punta al nodo successivo
 			n++;
 		}
 		

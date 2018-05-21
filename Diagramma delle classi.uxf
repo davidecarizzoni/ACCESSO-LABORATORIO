@@ -27,7 +27,7 @@
       <x>60</x>
       <y>10</y>
       <w>340</w>
-      <h>280</h>
+      <h>310</h>
     </coordinates>
     <panel_attributes>Accesso
 --
@@ -45,6 +45,8 @@
 +setMatricola(in Matricola:int)
 +getDataOra():LocalDateTime
 +setDataOra(in dataOra:LocalDateTime)
++setContaAccessi(in contaAccesi:int)
++getContaAccessi():int
 +toString():String
 +equals(in accesso:Accesso):boolean
 
