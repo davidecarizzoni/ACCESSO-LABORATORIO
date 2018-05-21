@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 /**
  * Classe per le operazioni di input dalla tastiera
  * @author Davide Carizzoni
- *
+ * @version 1.0
  */
 public class ConsoleInput 
 {
@@ -22,10 +22,9 @@ public class ConsoleInput
 	}
 	
 	/**
-	 * @return
+	 * @return valore intero letto
 	 * @throws NumberFormatException inserimento dato non conforme
 	 * @throws IOException impossibile leggere da dispositivo input
-	 * return valore intero letto
 	 */
 	public int readInt() throws NumberFormatException, IOException
 	{
@@ -35,11 +34,10 @@ public class ConsoleInput
 		//quando tipo di dato inserito è diverso da ciò che si aspetta--> NumberFormatException, (Runtime Exception, unchecked)
 	}
 	
-	/**
-	 * @return
+	/** 
+	 * @return  valore short letto
 	 * @throws NumberFormatException inserimento dato non conforme
 	 * @throws IOException impossibile leggere da dispositivo input
-	 * return valore short letto
 	 */
 	public short readShort() throws NumberFormatException, IOException
 	{
@@ -47,10 +45,9 @@ public class ConsoleInput
 	}
 	
 	/**
-	 * @return
+	 * @return valore long letto
 	 * @throws NumberFormatException inserimento dato non conforme
 	 * @throws IOException impossibile leggere da dispositivo input
-	 * return valore long letto
 	 */
 	public long readLong() throws NumberFormatException, IOException
 	{
@@ -58,10 +55,9 @@ public class ConsoleInput
 	}
 	
 	/**
-	 * @return
+	 * @return valore Byte letto
 	 * @throws NumberFormatException inserimento dato non conforme
 	 * @throws IOException impossibile leggere da dispositivo input
-	 * return valore Byte letto
 	 */
 	public byte readByte() throws NumberFormatException, IOException
 	{
@@ -69,10 +65,9 @@ public class ConsoleInput
 	}
 	
 	/**
-	 * @return
+	 * @return valore float letto
 	 * @throws NumberFormatException inserimento dato non conforme
-	 * @throws IOException impossibile leggere da dispositivo input
-	 * return valore float letto
+	 * @throws IOException impossibile leggere da dispositivo input * return 
 	 */
 	public float readFloat() throws NumberFormatException, IOException
 	{
@@ -80,10 +75,9 @@ public class ConsoleInput
 	}
 	
 	/**
-	 * @return
+	 * @return valore double letto
 	 * @throws NumberFormatException inserimento dato non conforme
 	 * @throws IOException impossibile leggere da dispositivo input
-	 * return valore double letto
 	 */
 	public double readDouble() throws NumberFormatException, IOException
 	{
@@ -91,10 +85,9 @@ public class ConsoleInput
 	}
 	
 	/**
-	 * @return
+	 * @return valore boolean letto
 	 * @throws NumberFormatException inserimento dato non conforme
 	 * @throws IOException impossibile leggere da dispositivo input
-	 * return valore boolean letto
 	 */
 	public boolean readBoolean() throws NumberFormatException, IOException
 	{
@@ -102,10 +95,9 @@ public class ConsoleInput
 	}
 	
 	/**
-	 * @return
+	 * @return carattere letto
 	 * @throws NumberFormatException inserimento dato non conforme
 	 * @throws IOException impossibile leggere da dispositivo input
-	 * return carattere letto
 	 */
 	public char readChar() throws NumberFormatException, IOException
 	{
@@ -113,10 +105,9 @@ public class ConsoleInput
 	}
 	
 	/**
-	 * @return
+	 * @return Stringa letta
 	 * @throws NumberFormatException inserimento dato non conforme
 	 * @throws IOException impossibile leggere da dispositivo input
-	 * return Stringa letta
 	 */
 	public String readString() throws NumberFormatException, IOException
 	{

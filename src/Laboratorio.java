@@ -86,7 +86,7 @@ public class Laboratorio implements Serializable
 	 * Metodo privato che permette di creare un oggetto di nodo
 	 * @param info rappresenta la componente informativa , ossia un accesso
 	 * @param link rappresenta il reference al nodo successivo
-	 * @return nodo, che rappreenta il nodo creato
+	 * @return nodo, che rappresenta il nodo creato
 	 */
 	private Nodo creaNodo(Accesso info, Nodo link)
 	{
@@ -364,6 +364,7 @@ public class Laboratorio implements Serializable
 	 * @param nomeFile rappresenta il nome del file sul quale si vuole salvare l'oggetto
 	 * @throws IOException eccezione che si verifica per errori nella scrittura del file
 	 */
+	//utilizzato nell'ordinatore
 	public void salvaLaboratorio(String nomeFile) throws IOException
 	{
 		FileOutputStream file=new FileOutputStream(nomeFile);
@@ -382,6 +383,7 @@ public class Laboratorio implements Serializable
 	 * @throws IOException eccezione che si verifica per errori durante il caricamento del laboratorio
 	 * @throws ClassNotFoundException eccezione che si verifica quando non è possibile deserializzare oggetti di tipo Laboratorio
 	 */
+	//utilizzato nell'ordinatore
 	public Laboratorio CaricaLaboratorio(String nomeFile) throws IOException, ClassNotFoundException
 	{
 		FileInputStream file=new FileInputStream(nomeFile);

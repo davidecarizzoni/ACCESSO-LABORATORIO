@@ -127,17 +127,41 @@ public class LaboratorioTest {
 		laboratorio.registraAccesso(accesso);
 		laboratorio.salvaLaboratorio(data);
 		Laboratorio lcopia=laboratorio.CaricaLaboratorio(data);
-		assertTrue("Salva e carica laboratorio",laboratorio.toString().compareTo(lcopia.toString())==0);
+		assertTrue("Salva e carica laboratorio con parametro data",laboratorio.toString().compareTo(lcopia.toString())==0);
 	}
-/*	
-	@Test (expected=IOException.class)
-	public void testCaricaLaboratorioEccezione() throws IOException, ClassNotFoundException 
+	
+	@Test
+	public void testSalvaCaricaLaboratorioNomeFile() throws IOException, ClassNotFoundException 
 	{
 		Laboratorio laboratorio=new Laboratorio();
-		LocalDate data=LocalDate.of(28,2,2015);//Non deve essere già presente un file con questa data altrimenti non si verfifica la condizione del file non presente
+		LocalDate data=LocalDate.now();
+		LocalTime ora=LocalTime.now();
+		LocalDateTime dataOra=LocalDateTime.of(data, ora);
+		Accesso accesso=new Accesso(1,dataOra);
+		laboratorio.registraAccesso(accesso);
+		laboratorio.salvaLaboratorio("test.bin");
+		Laboratorio lcopia=laboratorio.CaricaLaboratorio("test.bin");
+		assertTrue("Salva e carica laboratorio con parametro stringa",laboratorio.toString().compareTo(lcopia.toString())==0);
+	}
+	
+	@Test(expected=IOException.class)
+	public void testCaricaLaboratorio() throws IOException, ClassNotFoundException 
+	{
+		Laboratorio laboratorio=new Laboratorio();
+		//E' NECESSARIO INSERIRE UNA DATA PER LA QUALE NON SONO PRESENTI ACCESSI 
+		//E QUINDI NON E' MEMORIZZATO IL FILE BINARIO, ALTRIMENTI IL TEST NON ANDRA' A BUON FINE
+		LocalDate data=LocalDate.of(-1,1,1);
 		laboratorio.CaricaLaboratorio(data);
 	}
-*/	
+	
+	@Test(expected=IOException.class)
+	public void testCaricaLaboratorioNomeFile() throws IOException, ClassNotFoundException 
+	{
+		Laboratorio laboratorio=new Laboratorio();
+		laboratorio.CaricaLaboratorio("estFileNonPresente.bin");
+	
+	}
+
 	@Test
 	public void testEsportaLaboratorioCSV() throws IOException, LaboratorioException, FileException
 	{
@@ -175,13 +199,5 @@ public class LaboratorioTest {
 		l.registraAccesso(accesso);
 		l.verificaPresenza(2);
 	}	
-	
-	
-
-	
-	
-	
-	
-	
 
 }

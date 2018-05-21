@@ -2,7 +2,7 @@
  * Classe che rappresenta un'eccezione sollevata in particolari casi.
  * L'attributo della classe è il messaggio che si vuole mostrare quando l'eccezione viene sollevata
  * @author Davide Carizzoni
- *
+ * @version 1.0
  */
 public class LaboratorioException extends Exception 
 {

@@ -13,7 +13,7 @@ import javax.swing.plaf.synth.SynthSeparatorUI;
  */
 public class Ordinatore 
 {	
-
+//eseguita documentazione per metodi solo sui nodi
 //	<--------------------------------------------------------------NODI-------------------------------------------------------------------->
 	/**
 	 * Metodo che consente di scambiare due accessi del laboratorio rispettivamente in posizione 1 e posizione 2

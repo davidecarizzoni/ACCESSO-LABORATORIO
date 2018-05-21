@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>490</x>
-      <y>20</y>
+      <x>520</x>
+      <y>30</y>
       <w>210</w>
       <h>150</h>
     </coordinates>
@@ -24,8 +24,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>10</x>
-      <y>10</y>
+      <x>40</x>
+      <y>20</y>
       <w>340</w>
       <h>280</h>
     </coordinates>
@@ -46,6 +46,7 @@
 +getDataOra():Data
 +setDataOra(in dataOra:LocalDateTime)
 +toString():String
++equals(in accesso:Accesso):boolean
 
 </panel_attributes>
     <additional_attributes/>
@@ -53,41 +54,35 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>340</x>
+      <x>370</x>
       <y>70</y>
       <w>170</w>
-      <h>30</h>
+      <h>40</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>150.0;10.0;10.0;10.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1                       0..1</panel_attributes>
+    <additional_attributes>10.0;20.0;150.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>690</x>
-      <y>50</y>
-      <w>120</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;70.0;100.0;70.0;100.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>580</x>
-      <y>160</y>
-      <w>30</w>
+      <x>590</x>
+      <y>170</y>
+      <w>50</w>
       <h>100</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1...
+
+
+1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>380</x>
-      <y>240</y>
+      <x>410</x>
+      <y>250</y>
       <w>400</w>
       <h>410</h>
     </coordinates>
@@ -100,7 +95,7 @@
 +Laboratorio()
 +getElementi():int
 +getDirectoryCorrente():String
-+elencaDate():String
++elencaDate():String[]
 -creaNodo(in accesso:Accesso, in link:Nodo):Nodo
 -getLinkPosizione(in posizione:int):Nodo 
 +registraAccesso(in info:Accesso)
@@ -111,12 +106,48 @@
 +eliminaInCoda()
 +eliminaInPosizione(in posizione:int)
 +getAccesso(in posizione:int):Accesso
++verificaPresenza(in matricola:int):boolean
 +salvaLaboratorio(in dataOra:LocalDateTime)
 +salvaLaboratorio(in nomeFile:String)
 +CaricaLaboratorio(in dataOra:LocalDateTime):Laboratorio
 +caricaLaboratorio(in nomeFile:String):Laboratrio
-+esportaLaboratoroCSC(in dataOra:LocalDateTime)
++esportaLaboratoroCSV(in dataOra:LocalDateTime)
 </panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>720</x>
+      <y>50</y>
+      <w>110</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1           
+</panel_attributes>
+    <additional_attributes>10.0;20.0;90.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>800</x>
+      <y>60</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>720</x>
+      <y>90</y>
+      <w>110</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>0..1</panel_attributes>
+    <additional_attributes>10.0;20.0;90.0;20.0</additional_attributes>
   </element>
 </diagram>

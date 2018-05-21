@@ -58,7 +58,7 @@ public class TextFile
 	 * legge una riga di testo da un file di testo aperto in lettura
 	 * @return la riga letta dal file
 	 * @throws FileException eccezione che si verifica quando si tenta di scrivere su un file aperto in lettura,
-	 * oppure quando i tenta di leggere una riga del file ma non ci sono più righe da leggere o sono già state tutte lette
+	 *		   oppure quando i tenta di leggere una riga del file ma non ci sono più righe da leggere o sono già state tutte lette
 	 * @throws IOException eccezione che si verifica quando non è possibile legere da file
 	 */
 	public String fromFile() throws FileException, IOException

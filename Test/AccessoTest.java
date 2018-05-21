@@ -46,5 +46,15 @@ public class AccessoTest
 		accesso.setDataOra(dataOra);
 		assertTrue("setDataOra",accesso.getDataOra()==dataOra);
 	}
+	
+	@Test
+	public void testEquals() 
+	{
+		LocalDateTime dataOra=LocalDateTime.now();
+		Accesso accesso=new Accesso(1,dataOra);
+		Accesso accesso1=new Accesso(accesso);
+		assertTrue("setEquals",accesso.equals(accesso1)==true);
+	}
+	
 
 }

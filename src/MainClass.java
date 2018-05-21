@@ -72,18 +72,30 @@ public class MainClass
 					do {
 						dataOK=true;
 						try {
+							aa=0;
+							mm=0;
+							gg=0;
 							System.out.print("Giorno: ");
 							gg=tastiera.readInt();
 							System.out.print("Mese: ");
 							mm=tastiera.readInt();
 							System.out.print("Anno: ");
 							aa=tastiera.readInt();
+							
 						}catch (NumberFormatException e) {
 							System.out.println("Formato dato inserito errato");
 						} catch (IOException e) {
 							System.out.println("Impossibile leggere da tastiera");
 						}
+						if(aa<=0)
+						{
+							System.out.println("Errore nell'inserimento data, reinserirla!");
+							dataOK=false;
+							continue;
+						}
+							
 						try {
+							
 							data= LocalDate.of(aa, mm, gg);	
 						} catch (DateTimeException e) {
 							System.out.println("Errore nell'inserimento data, reinserirla!");
@@ -158,10 +170,13 @@ public class MainClass
 						System.out.println("->"+workingDir[i]);
 					}
 					System.out.println("INSERIRE LA DATA DI CUI SI VOGLIONO CARICARE GLI ACCESSI");
-					boolean dataOK1;;
+					boolean dataOK1;
 					do {
 						dataOK1=true;
 						try {
+							aa=0;
+							mm=0;
+							gg=0;
 							System.out.print("Giorno: ");
 							gg=tastiera.readInt();
 							System.out.print("Mese: ");
@@ -172,6 +187,12 @@ public class MainClass
 							System.out.println("Formato dato inserito errato ");
 						} catch (IOException e) {
 							System.out.println("Impossibile leggere da tastiera");
+						}
+						if(aa<=0)
+						{
+							System.out.println("Errore nell'inserimento data, reinserirla!");
+							dataOK1=false;
+							continue;
 						}
 						try {
 							data= LocalDate.of(aa, mm, gg);	
@@ -219,6 +240,9 @@ public class MainClass
 					do {
 						dataOK2=true;
 						try {
+							aa=0;
+							mm=0;
+							gg=0;
 							System.out.print("Giorno: ");
 							gg=tastiera.readInt();
 							System.out.print("Mese: ");
@@ -229,6 +253,12 @@ public class MainClass
 							System.out.println("Formato dato inserito errato");
 						} catch (IOException e) {
 							System.out.println("Impossibile leggere da tastiera");
+						}
+						if(aa<=0)
+						{
+							System.out.println("Errore nell'inserimento data, reinserirla!");
+							dataOK2=false;
+							continue;
 						}
 						try {
 							data= LocalDate.of(aa, mm, gg);	
@@ -286,25 +316,7 @@ public class MainClass
 			
 			case 4:
 				Laboratorio l2=new Laboratorio();
-				System.out.println("SALVA ACCESSI IN UN FILE DI TESTO IN ORDINE CRESCENTE");
-				try {
-					l2=Ordinatore.selectionSortCrescente(l1);
-					System.out.println(l2.toString());
-					l2.esportaLaboratorioCSV(data);
-					System.out.println("Operazione completata con successo");
-				} catch (FileException e) {
-					System.out.println("Impossibile completare l'operazione, file aperto in scrittura");
-				} catch (IOException e) {
-					System.out.println("Impossibile completare il salvataggio degli oggetti");
-				} catch (LaboratorioException e) {
-					System.out.println(e.toString());
-				} catch (NullPointerException e) {
-					System.out.println("Nessuna giornata presente. efettuare l'operazione di caricamento sulla data desiderata ");
-				}
 				
-				break;
-			
-			case 5:
 				workingDir=Laboratorio.elencaDate();
 				if(workingDir.length==0)
 					System.out.println("Nessun data con accessi presente, impossibile effettuare l'operazione di caricamento.");
@@ -315,11 +327,14 @@ public class MainClass
 					{
 						System.out.println("->"+workingDir[i]);
 					}
-					System.out.println("INSERIRE LA DATA DI CUI SI VOGLIONO CARICARE GLI ACCESSI");
-					boolean dataOK1;;
+					System.out.println("INSERIRE LA DATA DI CUI SI VOGLIONO SALVARE GLI ACCESSI IN UN FILE DI TESTO");
+					boolean dataOK3;
 					do {
-						dataOK1=true;
+						dataOK3=true;
 						try {
+							aa=0;
+							mm=0;
+							gg=0;
 							System.out.print("Giorno: ");
 							gg=tastiera.readInt();
 							System.out.print("Mese: ");
@@ -331,11 +346,17 @@ public class MainClass
 						} catch (IOException e) {
 							System.out.println("Impossibile leggere da tastiera");
 						}
+						if(aa<=0)
+						{
+							System.out.println("Errore nell'inserimento data, reinserirla!");
+							dataOK3=false;
+							continue;
+						}
 						try {
 							data= LocalDate.of(aa, mm, gg);	
 						} catch (DateTimeException e) {
 							System.out.println("Errore nell'inserimento data, reinserirla!");
-							dataOK1=false;
+							dataOK3=false;
 							continue;
 						} 
 						try
@@ -345,20 +366,43 @@ public class MainClass
 						}catch (NullPointerException e) {
 							
 						}
-					} while (dataOK1==false);
+					} while (dataOK3==false);
 					
 					try {
-						//l1.salvaLaboratorio(data);
 						l1=l1.CaricaLaboratorio(data);
 						System.out.println("Caricamento degli accessi in data "+data.toString()+" eseguito con successo");
 						//System.out.println(l1.toString());
 					} catch (ClassNotFoundException e) {
 						System.out.println("Impossibile caricare oggetti di tipo laboratorio");
 					} catch (IOException e) {
-						System.out.println("Nessun accesso presente in data "+data.toString()+". Impossibile completare il caricamento degli accessi.");
+						System.out.println("Nessun accesso presente in data "+data.toString()+". Impossibile completare il caricamento degli accessi per poi salvarli.");
+						break;
 					}
 				
+				try {
+					System.out.println("SALVATAGGIO ACCESSI IN UN FILE DI TESTO IN ORDINE CRESCENTE");
+					l2=Ordinatore.selectionSortCrescente(l1);
+					System.out.println(l2.toString());
+					l2.esportaLaboratorioCSV(data);
+					System.out.println("Operazione completata con successo");
+				} catch (FileException e) {
+					System.out.println("Impossibile completare l'operazione, file aperto in scrittura");
+				} catch (IOException e) {
+					System.out.println("Impossibile completare il salvataggio degli oggetti");
+				} catch (LaboratorioException e) {
+					System.out.println(e.toString());
+				} catch (NullPointerException e) {
+					System.out.println("Nessuna giornata presente. effettuare l'operazione di caricamento sulla data desiderata(operazione 2)");
 				}
+				}
+				break;
+			
+			case 5:
+				if(l1.getElementi()==0)
+					System.out.println("Nessuna giornata caricata, eseguire prima il caricamento di una data (operazione 2)");
+				else
+				{
+
 					System.out.println("VISUALIZZAZIONE ACCESSI IN ORDINE CRONOLOGICO CRESCENTE");
 					try {
 						l1=Ordinatore.selectionSortCrescenteNodi(l1);
@@ -374,11 +418,13 @@ public class MainClass
 						System.out.println("File non trovato");
 					}
 				
+				}
+				
 				
 				break;
 				
 			default:
-				System.out.println("Opzione non disponibile, reinserire");
+				
 				break;
 			}
 		}while(scelta!=0);
