@@ -283,6 +283,7 @@ public class MainClass
 							System.out.println("Impossibile caricare oggetti di tipo laboratorio");
 						} catch (IOException e) {
 							System.out.println("Nessun accesso presente in data "+data.toString()+". Impossibile verificare la presenza.");
+							break;
 						}					
 					System.out.println("INSERIRE LA MATRICOLA DEL DIPENDENTE DI CUI SI VOGLIONO VERIFICARE GLI ACCESSI");
 					boolean matricolaOK;
